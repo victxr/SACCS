@@ -20,9 +20,9 @@ android {
 }
 
 //buildscript {
-    repositories {
-       mavenCentral()
-    }
+repositories {
+    mavenCentral()
+}
 //}
 
 //se não ser certo isso de baixo tenta o que tá em cima comentado, e se não der certo o de cima, tenta a mesma coisa lá no outro graddle

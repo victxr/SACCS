@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/item_psicologa"
+          android:icon="@drawable/icone_psicologa"
+          android:title="Psicóloga"
+          app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/item_nutricionista"
+          android:icon="@drawable/icone_nutricionista"
+          app:showAsAction="ifRoom"
+          android:title="Nutricionista"/>
+
+    <item android:id="@+id/item_servico_social"
+          android:icon="@drawable/icone_servico_social"
+          app:showAsAction="ifRoom"
+          android:title="Serviço Social"/>
+
+</menu>

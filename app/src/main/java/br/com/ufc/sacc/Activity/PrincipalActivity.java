@@ -67,7 +67,9 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
                 fragment = new MessageFragment();
                 break;
             case R.id.nav_help:
-                fragment = new HelpFragment();
+               // fragment = new HelpFragment();
+                Intent intent = new Intent(getApplicationContext(), FaqActivity.class);
+                startActivity(intent);
                 break;
             case R.id.nav_location:
                 fragment = new LocationFragment();
