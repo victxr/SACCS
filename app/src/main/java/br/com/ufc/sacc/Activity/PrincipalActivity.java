@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,11 +13,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import br.com.ufc.sacc.R;
 
 public class PrincipalActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    Button btnLogout;
     private DrawerLayout drawer;
 
     @Override
@@ -52,30 +53,36 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        Fragment fragment = null;
+
         switch (item.getItemId()){
             case R.id.nav_profile:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ProfileFragment()).commit();
+                fragment = new ProfileFragment();
                 break;
             case R.id.nav_search:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new SearchFragment()).commit();
+                fragment = new SearchFragment();
                 break;
             case R.id.nav_message:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new MessageFragment()).commit();
+                fragment = new MessageFragment();
                 break;
             case R.id.nav_help:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new HelpFragment()).commit();
+                fragment = new HelpFragment();
                 break;
             case R.id.nav_location:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new LocationFragment()).commit();
+                fragment = new LocationFragment();
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
-        return true;
+        return loadFragment(fragment);
+    }
+
+    private boolean loadFragment(Fragment fragment){
+        if(fragment != null){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -83,7 +90,6 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
             this.moveTaskToBack(true);
         }
     }
