@@ -11,19 +11,24 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
+import br.com.ufc.sacc.Activity.Fragments.LocationFragment;
+import br.com.ufc.sacc.Activity.Fragments.MessageFragment;
+import br.com.ufc.sacc.Activity.Fragments.ProfileFragment;
+import br.com.ufc.sacc.Activity.Fragments.SearchFragment;
 import br.com.ufc.sacc.R;
 
 public class PrincipalActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
+    LinearLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
+
+        //layout.setBackgroundResource(R.drawable.background);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

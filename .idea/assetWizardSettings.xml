@@ -19,9 +19,9 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundLayerName" value="ic_launcher_background" />
-                                      <entry key="foregroundImage" value="C:\Users\Jonas Lopes\Desktop\background.png" />
-                                      <entry key="foregroundLayerName" value="ic_backgroundUfcFoto" />
-                                      <entry key="outputName" value="ic_backgroundUfc" />
+                                      <entry key="foregroundImage" value="C:\Users\Jonas Lopes\Desktop\usuario.png" />
+                                      <entry key="foregroundLayerName" value="ic_user" />
+                                      <entry key="outputName" value="ic_usuario" />
                                     </map>
                                   </option>
                                 </PersistentState>

@@ -32,11 +32,12 @@ public class CadastroActivity extends AppCompatActivity {
 
     private FirebaseAuth autenticacao;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
+
+        alert("Digite os dados de cadastro");
 
         edtCadNome = findViewById(R.id.edtCadNome);
         edtCadEmail = findViewById(R.id.edtCadEmail);
@@ -45,8 +46,6 @@ public class CadastroActivity extends AppCompatActivity {
         rbMasculino = findViewById(R.id.rbMasculino);
         rbFeminino = findViewById(R.id.rbFeminino);
         btnGravar = findViewById(R.id.btnGravar);
-
-        Toast.makeText(CadastroActivity.this, "Digite os dados de cadastro", Toast.LENGTH_SHORT).show();
 
         btnGravar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,13 +57,12 @@ public class CadastroActivity extends AppCompatActivity {
                     usuario.setSenha(edtCadSenha.getText().toString());
                     usuario.setSexo(retornaSexo(rbMasculino, rbFeminino));
 
-                    //adicionar um validar usuário bem aqui depois
-
-                    cadastrarUsuario();
+                    if(validarUsuario(usuario)){
+                        cadastrarUsuario();
+                    }
                 }else{
-                    Toast.makeText(CadastroActivity.this, "As senhas não correspondem", Toast.LENGTH_SHORT).show();
+                   alert("As senhas não correspondem");
                 }
-
             }
         });
     }
@@ -78,7 +76,7 @@ public class CadastroActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(CadastroActivity.this, "Usuário cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+                    alert("Usuário cadastrado com sucesso!");
 
                     String identificadorUsuario = Base64Custom.codificarBase64(usuario.getEmail());
                     FirebaseUser usuarioFirebase = task.getResult().getUser();
@@ -105,7 +103,7 @@ public class CadastroActivity extends AppCompatActivity {
                         erroExcecao = "Erro ao efetuar o cadastro, contacte o Administrador";
                         e.printStackTrace();
                     }
-                    Toast.makeText(CadastroActivity.this, "Erro: " + erroExcecao, Toast.LENGTH_SHORT).show();
+                    alert("Erro: " + erroExcecao);
                 }
             }
         });
@@ -131,4 +129,26 @@ public class CadastroActivity extends AppCompatActivity {
         return "Feminino";
     }
 
+    public void alert(String mensagem){
+        Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();
+    }
+
+    private boolean validarUsuario(Usuario usuario) {
+
+        if(usuario.getNome().isEmpty() || usuario.getNome() == "" || usuario.getNome() == null){
+            alert("Digite seu nome para poder se cadastrar");
+            return false;
+        }
+
+        if(usuario.getEmail().isEmpty() || usuario.getEmail() == "" || usuario.getEmail() == null){
+            alert("Digite o email para poder se cadastrar");
+            return false;
+        }
+        if(usuario.getSenha().isEmpty() || usuario.getSenha() == "" || usuario.getSenha() == null){
+            alert("Digite uma senha para poder se cadastrar");
+            return false;
+        }
+
+        return true;
+    }
 }

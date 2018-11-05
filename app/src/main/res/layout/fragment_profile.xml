@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="16dp">
 
     <TextView
             android:layout_width="wrap_content"
@@ -9,4 +11,26 @@
             android:text="Perfil"
             android:textSize="30sp"/>
 
-</RelativeLayout>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:text="Aqui será mostrado informações de cadastro do usuário, e permissões para alteração."
+            android:textSize="15sp"
+            android:layout_alignParentStart="true"
+            android:layout_above="@+id/imageView"/>
+
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="329dp"
+            android:src="@mipmap/ic_user"
+            android:id="@+id/imageView"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"/>
+
+    <Button android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Atualizar informações"
+            android:layout_gravity="center"/>
+
+</LinearLayout>

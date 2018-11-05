@@ -6,6 +6,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import br.com.ufc.sacc.Activity.Fragments.NutricionistaFragment;
+import br.com.ufc.sacc.Activity.Fragments.PsicologaFragment;
+import br.com.ufc.sacc.Activity.Fragments.ServicoSocialFragment;
 import br.com.ufc.sacc.R;
 
 public class FaqActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
