@@ -25,7 +25,8 @@ public class CadastroActivity extends AppCompatActivity {
     private EditText edtCadConfirmaSenha;
     private RadioButton rbMasculino;
     private RadioButton rbFeminino;
-    private Button btnGravar, btnTipo;
+    private Button btnGravar;
+    private Button btnTipoUser;
 
     private Usuario usuario;
 
@@ -45,7 +46,7 @@ public class CadastroActivity extends AppCompatActivity {
         rbMasculino = findViewById(R.id.rbMasculino);
         rbFeminino = findViewById(R.id.rbFeminino);
         btnGravar = findViewById(R.id.btnGravar);
-        btnTipo = findViewById(R.id.btnTipoUsuario);
+        btnTipoUser = findViewById(R.id.btnTipoUsuario);
 
 //        //Criando a instancia do popup menu
 //        PopupMenu popup = new PopupMenu(CadastroActivity.this, btnTipo);
@@ -71,35 +72,52 @@ public class CadastroActivity extends AppCompatActivity {
 //        });
 //        popup.show();
 
+        btnTipoUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu = new PopupMenu(CadastroActivity.this, btnTipoUser);
+                popupMenu.getMenuInflater().inflate(R.menu.dropdown_menu, popupMenu.getMenu());
+
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        alert(item.getTitle().toString());
+                        return true;
+                    }
+                });
+                popupMenu.show();
+            }
+        });
+
         btnGravar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(confirmaSenha(edtCadSenha.getText().toString(), edtCadConfirmaSenha.getText().toString())){
+                if (confirmaSenha(edtCadSenha.getText().toString(), edtCadConfirmaSenha.getText().toString())) {
                     usuario = new Usuario();
                     usuario.setNome(edtCadNome.getText().toString());
                     usuario.setEmail(edtCadEmail.getText().toString());
                     usuario.setSenha(edtCadSenha.getText().toString());
                     usuario.setSexo(retornaSexo(rbMasculino, rbFeminino));
 
-                    if(validarUsuario(usuario)){
+                    if (validarUsuario(usuario)) {
                         cadastrarUsuario();
                     }
-                }else{
-                   alert("As senhas não correspondem");
+                } else {
+                    alert("As senhas não correspondem");
                 }
             }
         });
     }
 
-    private void cadastrarUsuario(){
+    private void cadastrarUsuario() {
         autenticacao = ConfiguracaoFirebase.getAutenticacaoFirebase();
         autenticacao.createUserWithEmailAndPassword(
-                                                    usuario.getEmail(),
-                                                    usuario.getSenha()
+                usuario.getEmail(),
+                usuario.getSenha()
         ).addOnCompleteListener(CadastroActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     alert("Usuário cadastrado com sucesso!");
 
                     String identificadorUsuario = Base64Custom.codificarBase64(usuario.getEmail());
@@ -112,18 +130,18 @@ public class CadastroActivity extends AppCompatActivity {
 
                     abrirLoginUsuario();
 
-                }else{
+                } else {
                     String erroExcecao = "";
 
-                    try{
+                    try {
                         throw task.getException();
-                    }catch (FirebaseAuthWeakPasswordException e){
+                    } catch (FirebaseAuthWeakPasswordException e) {
                         erroExcecao = "Digite uma senha mais forte, com pelo menos 8 caracteres com letras e números";
-                    }catch (FirebaseAuthInvalidCredentialsException e){
+                    } catch (FirebaseAuthInvalidCredentialsException e) {
                         erroExcecao = "O email digitado é inválido, digite o novo email";
-                    }catch (FirebaseAuthUserCollisionException e) {
+                    } catch (FirebaseAuthUserCollisionException e) {
                         erroExcecao = "Esse e-mail já está cadastrado, utilize outro e-mail";
-                    }catch (Exception e) {
+                    } catch (Exception e) {
                         erroExcecao = "Erro ao efetuar o cadastro, contacte o Administrador";
                         e.printStackTrace();
                     }
@@ -133,42 +151,43 @@ public class CadastroActivity extends AppCompatActivity {
         });
     }
 
-    public void abrirLoginUsuario(){
+    public void abrirLoginUsuario() {
         Intent intent = new Intent(CadastroActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
     }
 
     private boolean confirmaSenha(String senha, String confirmaSenha) {
-        if(senha.equals(confirmaSenha)){
+        if (senha.equals(confirmaSenha)) {
             return true;
         }
         return false;
     }
-//
+
+    //
     private String retornaSexo(RadioButton rbMasculino, RadioButton rbFeminino) {
-        if(rbMasculino.isChecked()){
+        if (rbMasculino.isChecked()) {
             return "Masculino";
         }
         return "Feminino";
     }
 
-    public void alert(String mensagem){
+    public void alert(String mensagem) {
         Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();
     }
 
     private boolean validarUsuario(Usuario usuario) {
 
-        if(usuario.getNome().isEmpty() || usuario.getNome() == "" || usuario.getNome() == null){
+        if (usuario.getNome().isEmpty() || usuario.getNome() == "" || usuario.getNome() == null) {
             alert("Digite seu nome para poder se cadastrar");
             return false;
         }
 
-        if(usuario.getEmail().isEmpty() || usuario.getEmail() == "" || usuario.getEmail() == null){
+        if (usuario.getEmail().isEmpty() || usuario.getEmail() == "" || usuario.getEmail() == null) {
             alert("Digite o email para poder se cadastrar");
             return false;
         }
-        if(usuario.getSenha().isEmpty() || usuario.getSenha() == "" || usuario.getSenha() == null){
+        if (usuario.getSenha().isEmpty() || usuario.getSenha() == "" || usuario.getSenha() == null) {
             alert("Digite uma senha para poder se cadastrar");
             return false;
         }
