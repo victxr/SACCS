@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_marginLeft="16dp"
+              android:orientation="vertical">
 
     <TextView
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Psicologa"
+            android:text="Psicóloga"
             android:gravity="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
-</RelativeLayout>
+    <TextView
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Duvidas frequentes"/>
+
+    <ExpandableListView
+            android:id="@+id/listViewPsicologa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+    </ExpandableListView>
+
+</LinearLayout>

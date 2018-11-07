@@ -1,14 +1,13 @@
 package br.com.ufc.sacc.Activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.Toast;
+import android.widget.*;
 import br.com.ufc.sacc.Config.Base64Custom;
 import br.com.ufc.sacc.Config.Preferencias;
 import br.com.ufc.sacc.DAO.ConfiguracaoFirebase;
@@ -26,7 +25,7 @@ public class CadastroActivity extends AppCompatActivity {
     private EditText edtCadConfirmaSenha;
     private RadioButton rbMasculino;
     private RadioButton rbFeminino;
-    private Button btnGravar;
+    private Button btnGravar, btnTipo;
 
     private Usuario usuario;
 
@@ -46,6 +45,31 @@ public class CadastroActivity extends AppCompatActivity {
         rbMasculino = findViewById(R.id.rbMasculino);
         rbFeminino = findViewById(R.id.rbFeminino);
         btnGravar = findViewById(R.id.btnGravar);
+        btnTipo = findViewById(R.id.btnTipoUsuario);
+
+//        //Criando a instancia do popup menu
+//        PopupMenu popup = new PopupMenu(CadastroActivity.this, btnTipo);
+//        //Inflar o menu acionado pelo botão
+//        popup.getMenuInflater().inflate(R.menu.dropdown_menu, popup.getMenu());
+
+        //registrando o popup com o evento OnMenuItemClickListener
+//        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+//            @SuppressLint("WrongConstant")
+//            @Override
+//            public boolean onMenuItemClick(MenuItem item) {
+//                String itemTitle = (String) item.getTitle();
+//                itemTitle.toLowerCase();
+//
+//                //aqui voce chama os fragments
+//                //if(itemTitle.equalsIgnoreCase("aluno")){
+//                    //fragment do aluno
+//                //}else if(itemTitle.equalsIgnoreCase("servidor")){
+//                   //fragment do servidor
+//                //}
+//                return true;
+//            }
+//        });
+//        popup.show();
 
         btnGravar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,7 +145,7 @@ public class CadastroActivity extends AppCompatActivity {
         }
         return false;
     }
-
+//
     private String retornaSexo(RadioButton rbMasculino, RadioButton rbFeminino) {
         if(rbMasculino.isChecked()){
             return "Masculino";

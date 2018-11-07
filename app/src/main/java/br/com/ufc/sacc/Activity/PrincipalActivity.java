@@ -12,10 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
-import br.com.ufc.sacc.Activity.Fragments.LocationFragment;
-import br.com.ufc.sacc.Activity.Fragments.MessageFragment;
-import br.com.ufc.sacc.Activity.Fragments.ProfileFragment;
-import br.com.ufc.sacc.Activity.Fragments.SearchFragment;
+import br.com.ufc.sacc.Activity.Fragments.*;
 import br.com.ufc.sacc.R;
 
 public class PrincipalActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -54,6 +51,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
 //                startActivity(intent);
 //            }
 //        });
+        loadFragment(new HomeFragment());
     }
 
     @Override
@@ -61,7 +59,10 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
 
         Fragment fragment = null;
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
+            case R.id.nav_home:
+                fragment = new HomeFragment();
+                break;
             case R.id.nav_profile:
                 fragment = new ProfileFragment();
                 break;
@@ -72,9 +73,9 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
                 fragment = new MessageFragment();
                 break;
             case R.id.nav_help:
-               // fragment = new HelpFragment();
-                Intent intent = new Intent(getApplicationContext(), FaqActivity.class);
-                startActivity(intent);
+                // fragment = new HomeFragment();
+                Intent intent_faq = new Intent(getApplicationContext(), FaqActivity.class);
+                startActivity(intent_faq);
                 break;
             case R.id.nav_location:
                 fragment = new LocationFragment();
@@ -84,13 +85,14 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         return loadFragment(fragment);
     }
 
-    private boolean loadFragment(Fragment fragment){
-        if(fragment != null){
+    private boolean loadFragment(Fragment fragment) {
+        if (fragment != null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
             return true;
         }
         return false;
     }
+
 
     @Override
     public void onBackPressed() {
