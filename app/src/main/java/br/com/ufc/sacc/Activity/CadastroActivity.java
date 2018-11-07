@@ -81,7 +81,8 @@ public class CadastroActivity extends AppCompatActivity {
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        alert(item.getTitle().toString());
+                        String itemTitle = (String) item.getTitle();
+                        itemTitle.toLowerCase();
                         return true;
                     }
                 });
