@@ -48,29 +48,6 @@ public class CadastroActivity extends AppCompatActivity {
         btnGravar = findViewById(R.id.btnGravar);
         btnTipoUser = findViewById(R.id.btnTipoUsuario);
 
-//        //Criando a instancia do popup menu
-//        PopupMenu popup = new PopupMenu(CadastroActivity.this, btnTipo);
-//        //Inflar o menu acionado pelo botão
-//        popup.getMenuInflater().inflate(R.menu.dropdown_menu, popup.getMenu());
-
-        //registrando o popup com o evento OnMenuItemClickListener
-//        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-//            @SuppressLint("WrongConstant")
-//            @Override
-//            public boolean onMenuItemClick(MenuItem item) {
-//                String itemTitle = (String) item.getTitle();
-//                itemTitle.toLowerCase();
-//
-//                //aqui voce chama os fragments
-//                //if(itemTitle.equalsIgnoreCase("aluno")){
-//                    //fragment do aluno
-//                //}else if(itemTitle.equalsIgnoreCase("servidor")){
-//                   //fragment do servidor
-//                //}
-//                return true;
-//            }
-//        });
-//        popup.show();
 
         btnTipoUser.setOnClickListener(new View.OnClickListener() {
             @Override
