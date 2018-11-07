@@ -83,6 +83,13 @@ public class CadastroActivity extends AppCompatActivity {
                     public boolean onMenuItemClick(MenuItem item) {
                         String itemTitle = (String) item.getTitle();
                         itemTitle.toLowerCase();
+
+//                        aqui voce chama os fragments
+//                if(itemTitle.equalsIgnoreCase("aluno")){
+//                    //fragment do aluno
+//                //}else if(itemTitle.equalsIgnoreCase("servidor")){
+//                   //fragment do servidor
+//                //}
                         return true;
                     }
                 });
