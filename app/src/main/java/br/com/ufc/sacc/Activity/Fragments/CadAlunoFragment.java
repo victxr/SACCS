@@ -26,8 +26,6 @@ public class CadAlunoFragment extends Fragment {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_dropdown_item_1line, spinerListCurso);
         spinner.setAdapter(adapter);
 
-
-
         return view;
     }
 }

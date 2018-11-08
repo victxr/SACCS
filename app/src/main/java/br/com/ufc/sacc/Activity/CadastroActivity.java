@@ -14,6 +14,8 @@ import br.com.ufc.sacc.Activity.Fragments.HomeFragment;
 import br.com.ufc.sacc.Config.Base64Custom;
 import br.com.ufc.sacc.Config.Preferencias;
 import br.com.ufc.sacc.DAO.ConfiguracaoFirebase;
+import br.com.ufc.sacc.Model.Aluno;
+import br.com.ufc.sacc.Model.Servidor;
 import br.com.ufc.sacc.Model.Usuario;
 import br.com.ufc.sacc.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,6 +34,11 @@ public class CadastroActivity extends AppCompatActivity {
     private RadioButton rbFeminino;
     private Button btnGravar;
     private Button btnTipoUser;
+
+    private EditText edtCadMatricula;
+    private EditText edtCadSiac;
+    private Spinner edtCadCurso;
+    private Spinner edtCadFuncao;
 
     private Usuario usuario;
 
@@ -54,7 +61,6 @@ public class CadastroActivity extends AppCompatActivity {
         btnTipoUser = findViewById(R.id.btnTipoUsuario);
 
 
-
         btnTipoUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,12 +77,16 @@ public class CadastroActivity extends AppCompatActivity {
                         if (itemTitle.equalsIgnoreCase("aluno")) {
                             btnTipoUser.setText("Aluno");
                             fragment = new CadAlunoFragment();
+                            edtCadCurso = fragment.getView().findViewById(R.id.edtCadCurso);
+                            edtCadMatricula = fragment.getView().findViewById(R.id.edtCadMatricula);
+
                         } else if (itemTitle.equalsIgnoreCase("servidor")) {
                             btnTipoUser.setText("Servidor");
                             fragment = new CadServidorFragment();
+                            edtCadFuncao = fragment.getView().findViewById(R.id.edtCadFuncao);
+                            edtCadSiac = fragment.getView().findViewById(R.id.edtCadSiac);
+
                         }
-
-
                         return loadFragment(fragment);
                     }
 
@@ -89,12 +99,27 @@ public class CadastroActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (confirmaSenha(edtCadSenha.getText().toString(), edtCadConfirmaSenha.getText().toString())) {
-                    usuario = new Usuario();
-                    usuario.setNome(edtCadNome.getText().toString());
-                    usuario.setEmail(edtCadEmail.getText().toString());
-                    usuario.setSenha(edtCadSenha.getText().toString());
-                    usuario.setSexo(retornaSexo(rbMasculino, rbFeminino));
+                    if(btnTipoUser.getText() == "Aluno"){
+                         usuario = new Aluno();
 
+                        usuario.setNome(edtCadNome.getText().toString());
+                        usuario.setEmail(edtCadEmail.getText().toString());
+                        usuario.setSenha(edtCadSenha.getText().toString());
+                        usuario.setSexo(retornaSexo(rbMasculino, rbFeminino));
+                        ((Aluno) usuario).setMatricula(edtCadMatricula.getText().toString());
+                        ((Aluno) usuario).setCurso(edtCadCurso.getSelectedItem().toString());
+                    }else{
+                        usuario = new Servidor();
+
+                        usuario.setNome(edtCadNome.getText().toString());
+                        usuario.setEmail(edtCadEmail.getText().toString());
+                        usuario.setSenha(edtCadSenha.getText().toString());
+                        usuario.setSexo(retornaSexo(rbMasculino, rbFeminino));
+                        ((Servidor) usuario).setSiac(edtCadSiac.getText().toString());
+                        ((Servidor) usuario).setFuncao(edtCadFuncao.getSelectedItem().toString());
+                    }
+
+                    //mecher no validar cadastro
                     if (validarUsuario(usuario)) {
                         cadastrarUsuario();
                     }
