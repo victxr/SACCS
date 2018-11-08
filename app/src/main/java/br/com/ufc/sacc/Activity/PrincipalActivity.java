@@ -10,10 +10,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 import br.com.ufc.sacc.Activity.Fragments.*;
 import br.com.ufc.sacc.R;
+import com.facebook.login.Login;
 
 public class PrincipalActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -25,8 +29,6 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
-
-        //layout.setBackgroundResource(R.drawable.background);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -40,18 +42,6 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-//        btnLogout = findViewById(R.id.btnLogout);
-//        //fechar tudo ao deslogar
-//        btnLogout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(PrincipalActivity.this, MainActivity.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                intent.putExtra("SAIR", true);
-//                startActivity(intent);
-//            }
-//        });
 
 
         loadFragment(new HomeFragment());
@@ -86,6 +76,37 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         }
         drawer.closeDrawer(GravityCompat.START);
         return loadFragment(fragment);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.about:
+                abrirTelaSobre();
+                break;
+            case R.id.sair:
+                deslogar();
+                break;
+        }
+        return true;
+    }
+
+    private void deslogar() {
+        Toast.makeText(this, "Você deslogou!", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(PrincipalActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void abrirTelaSobre() {
+        Intent intent = new Intent(PrincipalActivity.this, SobreActivity.class);
+        startActivity(intent);
     }
 
     private boolean loadFragment(Fragment fragment) {

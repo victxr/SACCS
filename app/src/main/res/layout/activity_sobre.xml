@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_margin="16dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Activity.SobreActivity">
+
+    <TextView android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="Somos uma equipe do trabalho de Mobile. O app tem por objetivo principal marcar consultas e esclarecer duvidas sobre os serviços sociais da UFC."
+              android:textStyle="bold"
+              android:textSize="25dp"/>
+
+
+</android.support.constraint.ConstraintLayout>
