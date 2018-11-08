@@ -10,11 +10,9 @@
             android:layout_height="wrap_content"
             android:hint="SIAC"
             android:inputType="number"/>
-    <EditText
+    <Spinner
             android:id="@+id/edtCadFuncao"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Função"
-            android:inputType="text"/>
+            android:layout_height="wrap_content"/>
 
 </LinearLayout>

@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.*;
 import android.support.v4.app.Fragment;
+import android.widget.Spinner;
 
 public class CadastroActivity extends AppCompatActivity {
 
@@ -35,7 +36,6 @@ public class CadastroActivity extends AppCompatActivity {
     private Usuario usuario;
 
     private FirebaseAuth autenticacao;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +54,7 @@ public class CadastroActivity extends AppCompatActivity {
         btnTipoUser = findViewById(R.id.btnTipoUsuario);
 
 
+
         btnTipoUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,11 +67,12 @@ public class CadastroActivity extends AppCompatActivity {
                         String itemTitle = (String) item.getTitle();
                         itemTitle.toLowerCase();
 
-
                         Fragment fragment = null;
                         if (itemTitle.equalsIgnoreCase("aluno")) {
+                            btnTipoUser.setText("Aluno");
                             fragment = new CadAlunoFragment();
                         } else if (itemTitle.equalsIgnoreCase("servidor")) {
+                            btnTipoUser.setText("Servidor");
                             fragment = new CadServidorFragment();
                         }
 
