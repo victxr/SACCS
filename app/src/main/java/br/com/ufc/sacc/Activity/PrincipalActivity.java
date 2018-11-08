@@ -19,6 +19,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
 
     private DrawerLayout drawer;
     LinearLayout layout;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,8 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
 //                startActivity(intent);
 //            }
 //        });
+
+
         loadFragment(new HomeFragment());
     }
 
@@ -92,7 +95,6 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         }
         return false;
     }
-
 
     @Override
     public void onBackPressed() {
