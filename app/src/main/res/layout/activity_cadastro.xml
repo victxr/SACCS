@@ -75,6 +75,12 @@
                     android:layout_gravity="center"
                     android:id="@+id/btnTipoUsuario"/>
 
+
+            <FrameLayout
+                    android:id="@+id/fragment_container_cadastro"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
             <Button
                     android:id="@+id/btnGravar"
                     android:text="Salvar"
