@@ -8,6 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
+import br.com.ufc.sacc.Activity.Fragments.CadAlunoFragment;
+import br.com.ufc.sacc.Activity.Fragments.CadServidorFragment;
+import br.com.ufc.sacc.Activity.Fragments.HomeFragment;
 import br.com.ufc.sacc.Config.Base64Custom;
 import br.com.ufc.sacc.Config.Preferencias;
 import br.com.ufc.sacc.DAO.ConfiguracaoFirebase;
@@ -16,6 +19,7 @@ import br.com.ufc.sacc.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.*;
+import android.support.v4.app.Fragment;
 
 public class CadastroActivity extends AppCompatActivity {
 
@@ -31,6 +35,7 @@ public class CadastroActivity extends AppCompatActivity {
     private Usuario usuario;
 
     private FirebaseAuth autenticacao;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,14 +66,18 @@ public class CadastroActivity extends AppCompatActivity {
                         String itemTitle = (String) item.getTitle();
                         itemTitle.toLowerCase();
 
-//                        aqui voce chama os fragments
-//                if(itemTitle.equalsIgnoreCase("aluno")){
-//                    //fragment do aluno
-//                //}else if(itemTitle.equalsIgnoreCase("servidor")){
-//                   //fragment do servidor
-//                //}
-                        return true;
+
+                        Fragment fragment = null;
+                        if (itemTitle.equalsIgnoreCase("aluno")) {
+                            fragment = new CadAlunoFragment();
+                        } else if (itemTitle.equalsIgnoreCase("servidor")) {
+                            fragment = new CadServidorFragment();
+                        }
+
+
+                        return loadFragment(fragment);
                     }
+
                 });
                 popupMenu.show();
             }
@@ -94,6 +103,14 @@ public class CadastroActivity extends AppCompatActivity {
         });
     }
 
+
+    private boolean loadFragment(Fragment fragment) {
+        if (fragment != null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_cadastro, fragment).commit();
+            return true;
+        }
+        return false;
+    }
     private void cadastrarUsuario() {
         autenticacao = ConfiguracaoFirebase.getAutenticacaoFirebase();
         autenticacao.createUserWithEmailAndPassword(
