@@ -49,12 +49,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        edtEmail = findViewById(R.id.edtEmail);
-        edtSenha = findViewById(R.id.edtSenha);
-        btnLogar = findViewById(R.id.btnLogar);
-        tvAbreCadastro = findViewById(R.id.tvAbreCadastro);
+        inicializarComponentes();
 
-        Toast.makeText(LoginActivity.this, "Digite os dados de login", Toast.LENGTH_SHORT).show();
+        alert("Digite os dados de login");
 
         btnLogar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,6 +97,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private void signIn() {
         Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
         startActivityForResult(intent, 1);
+//        alert("Login efetuado. Bem vindo ao SACCS");
+//        Intent intent = new Intent(LoginActivity.this, PrincipalActivity.class);
+//        startActivity(intent);
     }
 
     private void conectarGoogleApi() {
@@ -204,7 +204,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(LoginActivity.this, "Login efetuado. Bem vindo ao SACCS", Toast.LENGTH_SHORT).show();
+                    alert("Login efetuado. Bem vindo ao SACCS");
                     abrirTelaPrincipal();
                 }
             }
@@ -245,5 +245,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         alert("Falha na conexão");
+    }
+
+    private void inicializarComponentes() {
+        edtEmail = findViewById(R.id.edtEmail);
+        edtSenha = findViewById(R.id.edtSenha);
+        btnLogar = findViewById(R.id.btnLogar);
+        tvAbreCadastro = findViewById(R.id.tvAbreCadastro);
     }
 }

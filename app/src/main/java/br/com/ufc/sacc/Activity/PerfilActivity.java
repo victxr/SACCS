@@ -1,5 +1,6 @@
 package br.com.ufc.sacc.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -97,10 +98,20 @@ public class PerfilActivity extends AppCompatActivity implements GoogleApiClient
     }
 
     private void inicializarComponentes() {
+
+        //depois adiciona as opções do google no logou da principal
+        redirecionaPrincipal();
+
         ivFoto = findViewById(R.id.ivFoto);
         txtEmail = findViewById(R.id.txtEmail);
         txtId = findViewById(R.id.txtId);
         btnDeslogarGoogle = findViewById(R.id.btnDeslogarGoogle);
+    }
+
+    private void redirecionaPrincipal() {
+        alert("Login efetuado. Bem vindo ao SACCS");
+        Intent intent = new Intent(PerfilActivity.this, PrincipalActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -120,7 +131,7 @@ public class PerfilActivity extends AppCompatActivity implements GoogleApiClient
         alert("Falha na conexão");
     }
 
-    private void alert(String falha_na_conexão) {
-        Toast.makeText(PerfilActivity.this, falha_na_conexão, Toast.LENGTH_SHORT).show();
+    private void alert(String mensagem) {
+        Toast.makeText(PerfilActivity.this, mensagem, Toast.LENGTH_SHORT).show();
     }
 }

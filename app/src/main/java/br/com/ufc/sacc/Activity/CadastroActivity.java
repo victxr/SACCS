@@ -51,15 +51,7 @@ public class CadastroActivity extends AppCompatActivity {
 
         alert("Digite os dados de cadastro");
 
-        edtCadNome = findViewById(R.id.edtCadNome);
-        edtCadEmail = findViewById(R.id.edtCadEmail);
-        edtCadSenha = findViewById(R.id.edtCadSenha);
-        edtCadConfirmaSenha = findViewById(R.id.edtCadConfirmaSenha);
-        rbMasculino = findViewById(R.id.rbMasculino);
-        rbFeminino = findViewById(R.id.rbFeminino);
-        btnGravar = findViewById(R.id.btnGravar);
-        btnTipoUser = findViewById(R.id.btnTipoUsuario);
-
+        inicializarComponentes();
 
         btnTipoUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +92,7 @@ public class CadastroActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (confirmaSenha(edtCadSenha.getText().toString(), edtCadConfirmaSenha.getText().toString())) {
                     if(btnTipoUser.getText() == "Aluno"){
-                         usuario = new Aluno();
+                        usuario = new Aluno();
 
                         usuario.setNome(edtCadNome.getText().toString());
                         usuario.setEmail(edtCadEmail.getText().toString());
@@ -129,7 +121,6 @@ public class CadastroActivity extends AppCompatActivity {
             }
         });
     }
-
 
     private boolean loadFragment(Fragment fragment) {
         if (fragment != null) {
@@ -192,8 +183,7 @@ public class CadastroActivity extends AppCompatActivity {
         }
         return false;
     }
-
-    //
+    
     private String retornaSexo(RadioButton rbMasculino, RadioButton rbFeminino) {
         if (rbMasculino.isChecked()) {
             return "Masculino";
@@ -220,7 +210,17 @@ public class CadastroActivity extends AppCompatActivity {
             alert("Digite uma senha para poder se cadastrar");
             return false;
         }
-
         return true;
+    }
+
+    private void inicializarComponentes() {
+        edtCadNome = findViewById(R.id.edtCadNome);
+        edtCadEmail = findViewById(R.id.edtCadEmail);
+        edtCadSenha = findViewById(R.id.edtCadSenha);
+        edtCadConfirmaSenha = findViewById(R.id.edtCadConfirmaSenha);
+        rbMasculino = findViewById(R.id.rbMasculino);
+        rbFeminino = findViewById(R.id.rbFeminino);
+        btnGravar = findViewById(R.id.btnGravar);
+        btnTipoUser = findViewById(R.id.btnTipoUsuario);
     }
 }

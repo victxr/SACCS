@@ -40,6 +40,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -70,9 +71,14 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
                 Intent intent_faq = new Intent(getApplicationContext(), FaqActivity.class);
                 startActivity(intent_faq);
                 break;
+            case R.id.cad_faq:
+                Intent intent_cad_faq = new Intent(getApplicationContext(), CadastroFaqActtivity.class);
+                startActivity(intent_cad_faq);
+                break;
             case R.id.nav_location:
                 fragment = new LocationFragment();
                 break;
+
         }
         drawer.closeDrawer(GravityCompat.START);
         return loadFragment(fragment);
