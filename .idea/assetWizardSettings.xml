@@ -52,7 +52,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/JetBrains/IntelliJ%20IDEA%202018.2.5/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_home_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/JetBrains/IntelliJ%20IDEA%202018.2.5/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_delete_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -62,7 +62,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_home" />
+                            <entry key="outputName" value="ic_action_delete" />
                             <entry key="sourceFile" value="C:\Users\Ester Silva" />
                           </map>
                         </option>
