@@ -3,6 +3,7 @@ package br.com.ufc.sacc.Activity;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,6 +23,8 @@ public class CadastroFaqActivity extends AppCompatActivity {
     int selected;
     EditText edtPergunta, edtResposta;
     ListView listView;
+    Spinner spinner;
+    final String[] spinerListFuncao = {"Assistente Social", "Psicologia", "Nutrição"};
 
     FirebaseDatabase fireBaseDatabase;
     DatabaseReference databaseReference;
@@ -30,6 +33,7 @@ public class CadastroFaqActivity extends AppCompatActivity {
     private ArrayAdapter<ItemFaq> arrayAdapterItemFaq;
 
     ItemFaq itemSelecionado;
+    int posicao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,17 @@ public class CadastroFaqActivity extends AppCompatActivity {
                 selected = position;
             }
         });
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                posicao = spinner.getSelectedItemPosition();
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
     }
 
     private void inicializarComponentes() {
@@ -60,6 +75,11 @@ public class CadastroFaqActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.listView);
         listView.setSelector(android.R.color.holo_green_light);
+
+        spinner = findViewById(R.id.edtFuncao);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(CadastroFaqActivity.this, android.R.layout.simple_dropdown_item_1line, spinerListFuncao);
+        spinner.setAdapter(adapter);
+
     }
 
     private void iniciarFirebase() {
@@ -98,7 +118,7 @@ public class CadastroFaqActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         ItemFaq itemFaq;
-        String pergunta, resposta;
+        String pergunta, resposta, tipo;
         String uid;
 
         switch (item.getItemId()) {
@@ -106,8 +126,9 @@ public class CadastroFaqActivity extends AppCompatActivity {
                 uid = UUID.randomUUID().toString();
                 pergunta = edtPergunta.getText().toString();
                 resposta = edtResposta.getText().toString();
+                tipo = spinerListFuncao[posicao];
 
-                itemFaq = new ItemFaq(uid, pergunta, resposta);
+                itemFaq = new ItemFaq(uid, pergunta, resposta, tipo);
 
                 if(validaItemFaq(itemFaq)){
                     databaseReference.child("ItemFaq").child(itemFaq.getUid()).setValue(itemFaq);
@@ -117,14 +138,15 @@ public class CadastroFaqActivity extends AppCompatActivity {
                 }else{
                     alert("Preencha todos os campos para finalizar!");
                 }
-
                 break;
+
             case R.id.editFaq:
                 uid = itemSelecionado.getUid();
                 pergunta = edtPergunta.getText().toString();
                 resposta = edtResposta.getText().toString();
+                tipo = spinerListFuncao[posicao];
 
-                itemFaq = new ItemFaq(uid, pergunta, resposta);
+                itemFaq = new ItemFaq(uid, pergunta, resposta, tipo);
 
                 if(validaItemFaq(itemFaq)){
                     databaseReference.child("ItemFaq").child(itemFaq.getUid()).setValue(itemFaq);
@@ -136,6 +158,7 @@ public class CadastroFaqActivity extends AppCompatActivity {
                 }
 
                 break;
+
             case R.id.delFaq:
                 itemFaq = new ItemFaq();
                 itemFaq.setUid(itemSelecionado.getUid());

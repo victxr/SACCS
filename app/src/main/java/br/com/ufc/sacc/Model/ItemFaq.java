@@ -10,14 +10,17 @@ public class ItemFaq {
     private String pergunta;
     private String resposta;
 
+    private String tipo;
+
     public ItemFaq(){}
 
-    public ItemFaq(String uid, String pergunta, String resposta) {
+    public ItemFaq(String uid, String pergunta, String resposta, String tipo) {
         this.id = contadorId++;
 
         this.uid = uid;
         this.pergunta = pergunta;
         this.resposta = resposta;
+        this.tipo = tipo;
     }
 
     public String getPergunta() {
@@ -50,6 +53,14 @@ public class ItemFaq {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     @Override
