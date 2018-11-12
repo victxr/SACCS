@@ -10,11 +10,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import br.com.ufc.sacc.Model.ItemFaq;
 import br.com.ufc.sacc.R;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
+    ValueEventListener valueEventListener;
     Context context;
     List<ItemFaq> itensDeFaq;
 
@@ -31,15 +34,15 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.list_group, null);
         }
 
-        ImageView imageViewGroup = ( ImageView )convertView.findViewById( R.id.imageViewGroup );
+        ImageView imageViewGroup = convertView.findViewById( R.id.imageViewGroup );
 
         if(isExpanded){
-            imageViewGroup.setImageResource( R.drawable.ic_expand_less_black_24dp);
+            imageViewGroup.setImageResource(R.drawable.ic_expand_less_black_24dp);
         } else{
-            imageViewGroup.setImageResource( R.drawable.ic_expand_more_black_18dp);
+            imageViewGroup.setImageResource(R.drawable.ic_expand_more_black_18dp);
         }
 
-        TextView txViewNomeItem = ( TextView )convertView.findViewById( R.id.listHeader );
+        TextView txViewNomeItem = convertView.findViewById( R.id.listHeader );
         txViewNomeItem.setTypeface(null, Typeface.BOLD);
         txViewNomeItem.setText( item.getPergunta());
 

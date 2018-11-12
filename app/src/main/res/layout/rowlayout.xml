@@ -4,14 +4,20 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <TextView
-            android:id="@+id/txtReposta"
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Texto de resposta"
-            android:textStyle="italic"
-            android:textSize="17dp"/>
+            android:orientation="horizontal">
 
+        <TextView
+                android:id="@+id/txtReposta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Texto de resposta"
+                android:textStyle="italic"
+                android:textSize="17dp"/>
+
+    </LinearLayout>
 
 
 </LinearLayout>
