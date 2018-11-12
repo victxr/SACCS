@@ -60,13 +60,13 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
                 fragment = new ProfileFragment();
                 break;
             case R.id.nav_search:
-                fragment = new SearchFragment();
+                Intent intent_consulta = new Intent(getApplicationContext(), SearchActivity.class);
+                startActivity(intent_consulta);
                 break;
             case R.id.nav_message:
                 fragment = new MessageFragment();
                 break;
             case R.id.nav_help:
-                // fragment = new HomeFragment();
                 Intent intent_faq = new Intent(getApplicationContext(), FaqActivity.class);
                 startActivity(intent_faq);
                 break;
