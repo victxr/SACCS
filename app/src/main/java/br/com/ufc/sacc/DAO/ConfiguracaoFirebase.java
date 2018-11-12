@@ -7,6 +7,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class ConfiguracaoFirebase {
     private static DatabaseReference referenciaFirebase;
     private static FirebaseAuth autenticacao;
+    private static FirebaseDatabase firebaseDatabase;
 
     public static DatabaseReference getFirebase(){
         if(referenciaFirebase == null){
@@ -22,5 +23,12 @@ public class ConfiguracaoFirebase {
         return autenticacao;
     }
 
+    public static FirebaseDatabase getFirebaseDatabase(){
+        if(firebaseDatabase == null){
+            firebaseDatabase = FirebaseDatabase.getInstance();
+            firebaseDatabase.setPersistenceEnabled(true);
+        }
+        return firebaseDatabase;
+    }
 
 }

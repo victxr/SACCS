@@ -60,7 +60,7 @@
         </activity>
         <activity android:name=".Activity.SobreActivity">
         </activity>
-        <activity android:name=".Activity.CadastroFaqActtivity">
+        <activity android:name=".Activity.CadastroFaqActivity">
         </activity>
     </application>
 

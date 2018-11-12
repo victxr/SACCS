@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-      xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/add"
-          android:title="Adicionar"
+    <item android:id="@+id/addFaq"
           android:icon="@drawable/ic_action_add"
-          app:showAsAction="always" />
+          android:title="Adicionar"
+          app:showAsAction="ifRoom"/>
 
-    <item android:id="@+id/edit"
-          android:title="Editar"
+    <item android:id="@+id/editFaq"
           android:icon="@drawable/ic_action_edit"
-          app:showAsAction="always" />
+          android:title="Editar"
+          app:showAsAction="ifRoom"/>
 
-    <item android:id="@+id/delete"
-          android:title="Apagar"
+    <item android:id="@+id/delFaq"
           android:icon="@drawable/ic_action_delete"
-          app:showAsAction="always" />
+          android:title="Deletar"
+          app:showAsAction="ifRoom"/>
+
 
 </menu>

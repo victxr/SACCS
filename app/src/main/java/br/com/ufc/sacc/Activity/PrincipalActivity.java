@@ -17,7 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 import br.com.ufc.sacc.Activity.Fragments.*;
 import br.com.ufc.sacc.R;
-import com.facebook.login.Login;
 
 public class PrincipalActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -72,13 +71,12 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
                 startActivity(intent_faq);
                 break;
             case R.id.cad_faq:
-                Intent intent_cad_faq = new Intent(getApplicationContext(), CadastroFaqActtivity.class);
+                Intent intent_cad_faq = new Intent(getApplicationContext(), CadastroFaqActivity.class);
                 startActivity(intent_cad_faq);
                 break;
             case R.id.nav_location:
                 fragment = new LocationFragment();
                 break;
-
         }
         drawer.closeDrawer(GravityCompat.START);
         return loadFragment(fragment);

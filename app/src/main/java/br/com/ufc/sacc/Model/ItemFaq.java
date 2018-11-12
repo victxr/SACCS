@@ -1,17 +1,21 @@
-package br.com.ufc.sacc.Activity;
+package br.com.ufc.sacc.Model;
+
 
 public class ItemFaq {
     private static int contadorId = 0;
 
     private int id;
+
+    private String uid;
     private String pergunta;
     private String resposta;
 
     public ItemFaq(){}
 
-    public ItemFaq(String pergunta, String resposta) {
-        this.id =contadorId++;
+    public ItemFaq(String uid, String pergunta, String resposta) {
+        this.id = contadorId++;
 
+        this.uid = uid;
         this.pergunta = pergunta;
         this.resposta = resposta;
     }
@@ -32,8 +36,20 @@ public class ItemFaq {
         this.resposta = resposta;
     }
 
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
@@ -42,7 +58,7 @@ public class ItemFaq {
     }
 
     public String getFullItem(){
-        return id + "-" +
+        return uid + "-" +
                 pergunta + "-" +
                 resposta;
     }

@@ -6,23 +6,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".Activity.CadastroFaqActtivity">
+        tools:context=".Activity.CadastroFaqActivity">
 
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#B0C4DE"
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
-            android:background="#B0C4DE"
             android:orientation="vertical">
+
 
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Utilize o menu acima para inserir, atualizar ou deletar um item."
-                android:textStyle="italic" />
+                android:textStyle="italic"/>
 
         <TextView
                 android:layout_width="match_parent"
@@ -31,7 +32,7 @@
                 android:text="Insira os dados do seu item de FAQ"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
         <EditText
                 android:id="@+id/edtPergunta"
@@ -39,17 +40,16 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Pergunta"
-                android:inputType="textPersonName" />
+                android:inputType="text"/>
 
         <EditText
                 android:id="@+id/edtResposta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Resposta"
-                android:lines="6"
-                android:inputType="phone" />
-        
+                android:maxHeight="200dp"
+                android:hint="Resposta"/>
+
     </LinearLayout>
 
     <ListView
