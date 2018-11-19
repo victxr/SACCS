@@ -7,154 +7,154 @@
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Marcar"/>
 
-    <!--<RadioGroup-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:id="@+id/radio">-->
+    <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radio">
 
-        <!--<TextView android:layout_width="wrap_content"-->
-                  <!--android:layout_height="wrap_content"-->
-                  <!--android:text="Segunda-Feira"/>-->
-        <!--<RadioButton-->
-                <!--android:text="08:00 às 10:00"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/ab_manha_seg"-->
-                <!--android:layout_weight="1"/>-->
-        <!--<RadioButton-->
-                <!--android:text="10:00 às 12:00"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/cd_manha_seg"-->
-                <!--android:layout_weight="1"/>-->
-        <!--<RadioButton-->
-                <!--android:text="13:30 às 15:30"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/ab_tarde_seg"-->
-                <!--android:layout_weight="1"/>-->
-        <!--<RadioButton-->
-                <!--android:text="15:30 às 17:30"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/cd_tarde_seg"-->
-                <!--android:layout_weight="1"/>-->
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Segunda-Feira"/>
+        <RadioButton
+                android:text="08:00 às 10:00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ab_manha_seg"
+                android:layout_weight="1"/>
+        <RadioButton
+                android:text="10:00 às 12:00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cd_manha_seg"
+                android:layout_weight="1"/>
+        <RadioButton
+                android:text="13:30 às 15:30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ab_tarde_seg"
+                android:layout_weight="1"/>
+        <RadioButton
+                android:text="15:30 às 17:30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cd_tarde_seg"
+                android:layout_weight="1"/>
 
-        <!--<TextView android:layout_width="wrap_content"-->
-                  <!--android:layout_height="wrap_content"-->
-                  <!--android:text="Terça-Feira"/>-->
-        <!--<RadioButton-->
-                <!--android:text="08:00 às 10:00"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/ab_manha_ter"-->
-                <!--android:layout_weight="1"/>-->
-        <!--<RadioButton-->
-                <!--android:text="10:00 às 12:00"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/cd_manha_ter"-->
-                <!--android:layout_weight="1"/>-->
-        <!--<RadioButton-->
-                <!--android:text="13:30 às 15:30"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/ab_tarde_ter"-->
-                <!--android:layout_weight="1"/>-->
-        <!--<RadioButton-->
-                <!--android:text="15:30 às 17:30"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/cd_tarde_ter"-->
-                <!--android:layout_weight="1"/>-->
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Terça-Feira"/>
+        <RadioButton
+                android:text="08:00 às 10:00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ab_manha_ter"
+                android:layout_weight="1"/>
+        <RadioButton
+                android:text="10:00 às 12:00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cd_manha_ter"
+                android:layout_weight="1"/>
+        <RadioButton
+                android:text="13:30 às 15:30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ab_tarde_ter"
+                android:layout_weight="1"/>
+        <RadioButton
+                android:text="15:30 às 17:30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cd_tarde_ter"
+                android:layout_weight="1"/>
 
-        <!--<TextView android:layout_width="wrap_content"-->
-                  <!--android:layout_height="wrap_content"-->
-                  <!--android:text="Quarta-Feira"/>-->
-        <!--<RadioButton-->
-                <!--android:text="08:00 às 10:00"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/ab_manha_qua"-->
-                <!--android:layout_weight="1"/>-->
-        <!--<RadioButton-->
-                <!--android:text="10:00 às 12:00"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/cd_manha_qua"-->
-                <!--android:layout_weight="1"/>-->
-        <!--<RadioButton-->
-                <!--android:text="13:30 às 15:30"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/ab_tarde_qua"-->
-                <!--android:layout_weight="1"/>-->
-        <!--<RadioButton-->
-                <!--android:text="15:30 às 17:30"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/cd_tarde_qua"-->
-                <!--android:layout_weight="1"/>-->
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Quarta-Feira"/>
+        <RadioButton
+                android:text="08:00 às 10:00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ab_manha_qua"
+                android:layout_weight="1"/>
+        <RadioButton
+                android:text="10:00 às 12:00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cd_manha_qua"
+                android:layout_weight="1"/>
+        <RadioButton
+                android:text="13:30 às 15:30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ab_tarde_qua"
+                android:layout_weight="1"/>
+        <RadioButton
+                android:text="15:30 às 17:30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cd_tarde_qua"
+                android:layout_weight="1"/>
 
-        <!--<TextView android:layout_width="wrap_content"-->
-                  <!--android:layout_height="wrap_content"-->
-                  <!--android:text="Quinta-Feira"/>-->
-        <!--<RadioButton-->
-                <!--android:text="08:00 às 10:00"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/ab_manha_qui"-->
-                <!--android:layout_weight="1"/>-->
-        <!--<RadioButton-->
-                <!--android:text="10:00 às 12:00"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/cd_manha_qui"-->
-                <!--android:layout_weight="1"/>-->
-        <!--<RadioButton-->
-                <!--android:text="13:30 às 15:30"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/ab_tarde_qui"-->
-                <!--android:layout_weight="1"/>-->
-        <!--<RadioButton-->
-                <!--android:text="15:30 às 17:30"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/cd_tarde_qui"-->
-                <!--android:layout_weight="1"/>-->
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Quinta-Feira"/>
+        <RadioButton
+                android:text="08:00 às 10:00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ab_manha_qui"
+                android:layout_weight="1"/>
+        <RadioButton
+                android:text="10:00 às 12:00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cd_manha_qui"
+                android:layout_weight="1"/>
+        <RadioButton
+                android:text="13:30 às 15:30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ab_tarde_qui"
+                android:layout_weight="1"/>
+        <RadioButton
+                android:text="15:30 às 17:30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cd_tarde_qui"
+                android:layout_weight="1"/>
 
-        <!--<TextView android:layout_width="wrap_content"-->
-                  <!--android:layout_height="wrap_content"-->
-                  <!--android:text="Sexta-Feira"/>-->
-        <!--<RadioButton-->
-                <!--android:text="08:00 às 10:00"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/ab_manha_sex"-->
-                <!--android:layout_weight="1"/>-->
-        <!--<RadioButton-->
-                <!--android:text="10:00 às 12:00"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/cd_manha_sex"-->
-                <!--android:layout_weight="1"/>-->
-        <!--<RadioButton-->
-                <!--android:text="13:30 às 15:30"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/ab_tarde_sex"-->
-                <!--android:layout_weight="1"/>-->
-        <!--<RadioButton-->
-                <!--android:text="15:30 às 17:30"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/cd_tarde_sex"-->
-                <!--android:layout_weight="1"/>-->
-    <!--</RadioGroup>-->
-    <!--<Button android:layout_width="wrap_content" android:layout_height="wrap_content"-->
-            <!--android:id="@+id/btnConfirmarConsulta"-->
-            <!--android:text="Marcar Consulta"-->
-            <!--android:layout_gravity="center"/>-->
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Sexta-Feira"/>
+        <RadioButton
+                android:text="08:00 às 10:00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ab_manha_sex"
+                android:layout_weight="1"/>
+        <RadioButton
+                android:text="10:00 às 12:00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cd_manha_sex"
+                android:layout_weight="1"/>
+        <RadioButton
+                android:text="13:30 às 15:30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ab_tarde_sex"
+                android:layout_weight="1"/>
+        <RadioButton
+                android:text="15:30 às 17:30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cd_tarde_sex"
+                android:layout_weight="1"/>
+    </RadioGroup>
+    <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:id="@+id/btnConfirmarConsulta"
+            android:text="Marcar Consulta"
+            android:layout_gravity="center"/>
 
 </LinearLayout>

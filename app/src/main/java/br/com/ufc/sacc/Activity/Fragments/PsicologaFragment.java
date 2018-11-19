@@ -76,9 +76,7 @@ public class PsicologaFragment extends Fragment {
 //                getActivity()
 //                getContext();
 //                parent.getContext()
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
@@ -88,6 +86,4 @@ public class PsicologaFragment extends Fragment {
         fireBaseDatabase = ConfiguracaoFirebase.getFirebaseDatabase();
         databaseReference = ConfiguracaoFirebase.getFirebase();
     }
-
-
 }

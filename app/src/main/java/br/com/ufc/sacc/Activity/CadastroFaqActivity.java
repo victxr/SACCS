@@ -77,7 +77,7 @@ public class CadastroFaqActivity extends AppCompatActivity {
         listView.setSelector(android.R.color.holo_green_light);
 
         spinner = findViewById(R.id.edtFuncao);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(CadastroFaqActivity.this, android.R.layout.simple_dropdown_item_1line, spinerListFuncao);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(CadastroFaqActivity.this, android.R.layout.simple_dropdown_item_1line, spinerListFuncao);
         spinner.setAdapter(adapter);
 
     }
