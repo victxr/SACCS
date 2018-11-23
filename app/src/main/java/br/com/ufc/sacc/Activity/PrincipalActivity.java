@@ -13,7 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 import br.com.ufc.sacc.Activity.Fragments.*;
 import br.com.ufc.sacc.R;
@@ -21,8 +20,6 @@ import br.com.ufc.sacc.R;
 public class PrincipalActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
-    LinearLayout layout;
-    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +57,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
                 fragment = new ProfileFragment();
                 break;
             case R.id.nav_search:
-                Intent intent_consulta = new Intent(getApplicationContext(), SearchActivity.class);
-                startActivity(intent_consulta);
+                fragment = new SearchFragment();
                 break;
             case R.id.nav_message:
                 fragment = new MessageFragment();

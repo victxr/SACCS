@@ -8,4 +8,5 @@
 
     <color name="colorCliqueAqui">#4169E1</color>
     <color name="colorNavHeaderPrincipal">#979797</color>
+    <color name="colorGray">#979797</color>
 </resources>

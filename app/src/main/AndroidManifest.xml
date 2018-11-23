@@ -60,6 +60,8 @@
         </activity>
         <activity android:name=".Activity.SobreActivity">
         </activity>
+        <activity android:name=".Activity.MarcarConsultaActivity">
+        </activity>
         <activity android:name=".Activity.CadastroFaqActivity">
         </activity>
     </application>
