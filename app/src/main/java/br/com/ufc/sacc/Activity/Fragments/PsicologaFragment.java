@@ -1,6 +1,7 @@
 package br.com.ufc.sacc.Activity.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,9 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import br.com.ufc.sacc.Activity.Adapter.ExpandableListAdapter;
+import br.com.ufc.sacc.Activity.FaqActivity;
 import br.com.ufc.sacc.DAO.ConfiguracaoFirebase;
 import br.com.ufc.sacc.Model.ItemFaq;
 import br.com.ufc.sacc.R;
+import br.com.ufc.sacc.ServicesBroadcasts.ServiceDownloadFaq;
 import com.google.firebase.database.*;
 
 import java.util.ArrayList;
@@ -29,15 +32,14 @@ public class PsicologaFragment extends Fragment {
 
     Context context;
 
+    View view;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_psicologa, null);
+         view = inflater.inflate(R.layout.fragment_psicologa, null);
 
         context = view.getContext();
-
-        expandableListViewItens = view.findViewById(R.id.listViewPsicologa);
-        expandableListViewItens.setSelector( android.R.color.holo_green_light);
 
         inicializarComponentes();
         iniciarFirebase();
@@ -57,10 +59,14 @@ public class PsicologaFragment extends Fragment {
     private void inicializarComponentes() {
         selected = -1;
 
+        expandableListViewItens = view.findViewById(R.id.listViewPsicologa);
+        expandableListViewItens.setSelector( android.R.color.holo_green_light);
+
         listaItens = new ArrayList<ItemFaq>();
     }
 
     private void dispararAtualizacao() {
+
         databaseReference.child("ItemFaq").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -74,9 +80,6 @@ public class PsicologaFragment extends Fragment {
                 adapter = new ExpandableListAdapter(context, listaItens);
                 expandableListViewItens.setAdapter(adapter);
 
-//                getActivity()
-//                getContext();
-//                parent.getContext()
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {}
