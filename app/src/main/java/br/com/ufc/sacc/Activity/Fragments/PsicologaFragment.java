@@ -19,13 +19,13 @@ import java.util.ArrayList;
 
 public class PsicologaFragment extends Fragment {
 
-     int selected;
-     ArrayList<ItemFaq> listaItens;
+    int selected;
+    ArrayList<ItemFaq> listaItens;
 
-     ExpandableListAdapter adapter;
-     ExpandableListView expandableListViewItens;
-     FirebaseDatabase fireBaseDatabase;
-     DatabaseReference databaseReference;
+    ExpandableListAdapter adapter;
+    ExpandableListView expandableListViewItens;
+    FirebaseDatabase fireBaseDatabase;
+    DatabaseReference databaseReference;
 
     Context context;
 
@@ -68,7 +68,8 @@ public class PsicologaFragment extends Fragment {
                 for(DataSnapshot objSnap: dataSnapshot.getChildren()){
                     ItemFaq itemFaq = objSnap.getValue(ItemFaq.class);
 
-                    listaItens.add(itemFaq);
+                    if(itemFaq.getTipo().equals("Psicologia")) listaItens.add(itemFaq);
+
                 }
                 adapter = new ExpandableListAdapter(context, listaItens);
                 expandableListViewItens.setAdapter(adapter);
