@@ -22,12 +22,22 @@
             <item android:id="@+id/nav_help"
                   android:icon="@drawable/ic_help"
                   android:title="FAQ"/>
-            <item android:id="@+id/cad_faq"
-                  android:icon="@drawable/ic_cad_faq"
-                  android:title="Cadastro FAQ"/>
+
             <item android:id="@+id/nav_location"
                   android:icon="@drawable/ic_location"
                   android:title="Como chegar"/>
         </menu>
     </item>
+    <item android:title="Servidor">
+        <menu>
+            <item android:id="@+id/nav_cad_consulta"
+                  android:icon="@drawable/ic_add_consulta"
+                  android:title="Cad Consulta"/>
+
+            <item android:id="@+id/cad_faq"
+                  android:icon="@drawable/ic_cad_faq"
+                  android:title="Cadastro FAQ"/>
+        </menu>
+    </item>
 </menu>
+

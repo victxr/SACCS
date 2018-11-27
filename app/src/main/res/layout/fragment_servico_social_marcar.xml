@@ -168,7 +168,15 @@
                         android:id="@+id/cd_tarde_sex"
                         android:layout_weight="1"/>
             </RadioGroup>
-            <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="Motivo:"/>
+            <EditText android:id="@+id/motivo"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"/>
+
+            <Button android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:id="@+id/btnConfirmarConsulta"
                     android:text="Marcar Consulta"
                     android:layout_gravity="center"

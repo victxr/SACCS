@@ -66,6 +66,10 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
                 Intent intent_faq = new Intent(getApplicationContext(), FaqActivity.class);
                 startActivity(intent_faq);
                 break;
+            case R.id.nav_cad_consulta:
+                Intent intent_cad_consulta = new Intent(getApplicationContext(), CadastroConsultaActivity.class);
+                startActivity(intent_cad_consulta);
+                break;
             case R.id.cad_faq:
                 Intent intent_cad_faq = new Intent(getApplicationContext(), CadastroFaqActivity.class);
                 startActivity(intent_cad_faq);

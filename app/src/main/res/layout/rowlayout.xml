@@ -13,7 +13,7 @@
                 android:id="@+id/txtReposta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Texto de resposta"
+                android:text="Texto de horario"
                 android:textStyle="italic"
                 android:textSize="17dp"/>
 

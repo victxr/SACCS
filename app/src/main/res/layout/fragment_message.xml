@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Aqui será mostrado um chat para o servidor com alguma pergunta caso o aluno não tenha encontrado a sua resposta na FAQ"
+            android:text="Aqui será mostrado um chat para o servidor com alguma pergunta caso o aluno não tenha encontrado a sua horario na FAQ"
             android:textSize="15sp"
             android:layout_alignParentStart="true"
             android:layout_above="@+id/imageView"/>

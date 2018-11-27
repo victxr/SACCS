@@ -68,7 +68,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/JetBrains/IntelliJ%20IDEA%202018.2.5/plugins/android/lib/android.jar!/images/material_design_icons/av/ic_playlist_add_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/JetBrains/IntelliJ%20IDEA%20Community%20Edition%202018.2.6/plugins/android/lib/android.jar!/images/material_design_icons/image/ic_add_to_photos_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -78,7 +78,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_cad_faq" />
+                            <entry key="outputName" value="ic_add_consulta" />
                             <entry key="sourceFile" value="C:\Users\Ester Silva" />
                           </map>
                         </option>

@@ -74,13 +74,6 @@ public class CadastroActivity extends AppCompatActivity {
         });
     }
 
-    private boolean loadFragment(Fragment fragment) {
-        if (fragment != null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_cadastro, fragment).commit();
-            return true;
-        }
-        return false;
-    }
 
     private void cadastrarUsuario() {
         autenticacao = ConfiguracaoFirebase.getAutenticacaoFirebase();
@@ -180,6 +173,8 @@ public class CadastroActivity extends AppCompatActivity {
         edtCadConfirmaSenha = findViewById(R.id.edtCadConfirmaSenha);
         rbMasculino = findViewById(R.id.rbMasculino);
         rbFeminino = findViewById(R.id.rbFeminino);
+        rbAluno = findViewById(R.id.rbAluno);
+        rbServidor= findViewById(R.id.rbServidor);
         btnGravar = findViewById(R.id.btnGravar);
         edtCadRegistro = findViewById(R.id.edtCadRegistro);
     }

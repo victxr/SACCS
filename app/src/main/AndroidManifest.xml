@@ -68,6 +68,8 @@
         </activity>
         <activity android:name=".Activity.CadastroFaqActivity">
         </activity>
+        <activity android:name=".Activity.CadastroConsultaActivity">
+        </activity>
     </application>
 
 </manifest>
