@@ -1,21 +1,14 @@
 package br.com.ufc.sacc.Activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
-import br.com.ufc.sacc.Activity.Fragments.CadAlunoFragment;
-import br.com.ufc.sacc.Activity.Fragments.CadServidorFragment;
-import br.com.ufc.sacc.Activity.Fragments.HomeFragment;
 import br.com.ufc.sacc.Config.Base64Custom;
 import br.com.ufc.sacc.Config.Preferencias;
 import br.com.ufc.sacc.DAO.ConfiguracaoFirebase;
-import br.com.ufc.sacc.Model.Aluno;
-import br.com.ufc.sacc.Model.Servidor;
 import br.com.ufc.sacc.Model.Usuario;
 import br.com.ufc.sacc.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,10 +23,12 @@ public class CadastroActivity extends AppCompatActivity {
     private EditText edtCadEmail;
     private EditText edtCadSenha;
     private EditText edtCadConfirmaSenha;
+    private EditText edtCadRegistro;
     private RadioButton rbMasculino;
     private RadioButton rbFeminino;
+    private RadioButton rbAluno;
+    private RadioButton rbServidor;
     private Button btnGravar;
-    private Button btnTipoUser;
 
     private EditText edtCadMatricula;
     private EditText edtCadSiac;
@@ -53,63 +48,20 @@ public class CadastroActivity extends AppCompatActivity {
 
         inicializarComponentes();
 
-        btnTipoUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PopupMenu popupMenu = new PopupMenu(CadastroActivity.this, btnTipoUser);
-                popupMenu.getMenuInflater().inflate(R.menu.dropdown_menu, popupMenu.getMenu());
-
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        String itemTitle = (String) item.getTitle();
-                        itemTitle.toLowerCase();
-
-                        Fragment fragment = null;
-                        if (itemTitle.equalsIgnoreCase("aluno")) {
-                            btnTipoUser.setText("Aluno");
-                            fragment = new CadAlunoFragment();
-//                            edtCadCurso = fragment.getView().findViewById(R.id.edtCadCurso);
-//                            edtCadMatricula = fragment.getView().findViewById(R.id.edtCadMatricula);
-
-                        } else if (itemTitle.equalsIgnoreCase("servidor")) {
-                            btnTipoUser.setText("Servidor");
-                            fragment = new CadServidorFragment();
-//                            edtCadFuncao = fragment.getView().findViewById(R.id.edtCadFuncao);
-//                            edtCadSiac = fragment.getView().findViewById(R.id.edtCadSiac);
-
-                        }
-                        return loadFragment(fragment);
-                    }
-
-                });
-                popupMenu.show();
-            }
-        });
 
         btnGravar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (confirmaSenha(edtCadSenha.getText().toString(), edtCadConfirmaSenha.getText().toString())) {
-                    if(btnTipoUser.getText() == "Aluno"){
-                        usuario = new Aluno();
 
-                        usuario.setNome(edtCadNome.getText().toString());
-                        usuario.setEmail(edtCadEmail.getText().toString());
-                        usuario.setSenha(edtCadSenha.getText().toString());
-                        usuario.setSexo(retornaSexo(rbMasculino, rbFeminino));
-                        ((Aluno) usuario).setMatricula(edtCadMatricula.getText().toString());
-                        ((Aluno) usuario).setCurso(edtCadCurso.getSelectedItem().toString());
-                    }else{
-                        usuario = new Servidor();
+                    usuario = new Usuario();
 
-                        usuario.setNome(edtCadNome.getText().toString());
-                        usuario.setEmail(edtCadEmail.getText().toString());
-                        usuario.setSenha(edtCadSenha.getText().toString());
-                        usuario.setSexo(retornaSexo(rbMasculino, rbFeminino));
-                        ((Servidor) usuario).setSiac(edtCadSiac.getText().toString());
-                        ((Servidor) usuario).setFuncao(edtCadFuncao.getSelectedItem().toString());
-                    }
+                    usuario.setNome(edtCadNome.getText().toString());
+                    usuario.setEmail(edtCadEmail.getText().toString());
+                    usuario.setSenha(edtCadSenha.getText().toString());
+                    usuario.setTipo(retornaTipo(rbAluno, rbServidor));
+                    usuario.setRegistro(edtCadRegistro.getText().toString());
+                    usuario.setSexo(retornaSexo(rbMasculino, rbFeminino));
 
                     //mecher no validar cadastro
                     if (validarUsuario(usuario)) {
@@ -129,6 +81,7 @@ public class CadastroActivity extends AppCompatActivity {
         }
         return false;
     }
+
     private void cadastrarUsuario() {
         autenticacao = ConfiguracaoFirebase.getAutenticacaoFirebase();
         autenticacao.createUserWithEmailAndPassword(
@@ -183,12 +136,19 @@ public class CadastroActivity extends AppCompatActivity {
         }
         return false;
     }
-    
+
     private String retornaSexo(RadioButton rbMasculino, RadioButton rbFeminino) {
         if (rbMasculino.isChecked()) {
             return "Masculino";
         }
         return "Feminino";
+    }
+
+    private String retornaTipo(RadioButton rbAluno, RadioButton rbServidor) {
+        if (rbAluno.isChecked()) {
+            return "Aluno";
+        }
+        return "Servidor";
     }
 
     public void alert(String mensagem) {
@@ -221,6 +181,6 @@ public class CadastroActivity extends AppCompatActivity {
         rbMasculino = findViewById(R.id.rbMasculino);
         rbFeminino = findViewById(R.id.rbFeminino);
         btnGravar = findViewById(R.id.btnGravar);
-        btnTipoUser = findViewById(R.id.btnTipoUsuario);
+        edtCadRegistro = findViewById(R.id.edtCadRegistro);
     }
 }

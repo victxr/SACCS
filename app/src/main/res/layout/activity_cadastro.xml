@@ -47,6 +47,36 @@
                     android:inputType="textPassword"/>
 
             <RadioGroup
+                    android:id="@+id/rgRegistro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                <RadioButton
+                        android:id="@+id/rbAluno"
+                        android:text="Aluno"
+                        android:checked="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <RadioButton
+                        android:id="@+id/rbServidor"
+                        android:text="Servidor"
+                        android:checked="false"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+            </RadioGroup>
+            <EditText
+                    android:id="@+id/edtCadRegistro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Matricula/SIAPE"
+                    android:inputType="number"/>
+
+
+            <RadioGroup
                     android:id="@+id/rgSexo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -68,19 +98,6 @@
                         android:layout_height="wrap_content"/>
 
             </RadioGroup>
-
-            <Button
-                    android:text="Tipo de usuário"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:id="@+id/btnTipoUsuario"/>
-
-
-            <FrameLayout
-                    android:id="@+id/fragment_container_cadastro"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
 
             <Button
                     android:id="@+id/btnGravar"
