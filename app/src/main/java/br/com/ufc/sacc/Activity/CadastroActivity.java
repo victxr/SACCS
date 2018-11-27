@@ -69,14 +69,14 @@ public class CadastroActivity extends AppCompatActivity {
                         if (itemTitle.equalsIgnoreCase("aluno")) {
                             btnTipoUser.setText("Aluno");
                             fragment = new CadAlunoFragment();
-                            edtCadCurso = fragment.getView().findViewById(R.id.edtCadCurso);
-                            edtCadMatricula = fragment.getView().findViewById(R.id.edtCadMatricula);
+//                            edtCadCurso = fragment.getView().findViewById(R.id.edtCadCurso);
+//                            edtCadMatricula = fragment.getView().findViewById(R.id.edtCadMatricula);
 
                         } else if (itemTitle.equalsIgnoreCase("servidor")) {
                             btnTipoUser.setText("Servidor");
                             fragment = new CadServidorFragment();
-                            edtCadFuncao = fragment.getView().findViewById(R.id.edtCadFuncao);
-                            edtCadSiac = fragment.getView().findViewById(R.id.edtCadSiac);
+//                            edtCadFuncao = fragment.getView().findViewById(R.id.edtCadFuncao);
+//                            edtCadSiac = fragment.getView().findViewById(R.id.edtCadSiac);
 
                         }
                         return loadFragment(fragment);
