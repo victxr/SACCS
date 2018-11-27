@@ -25,7 +25,7 @@ public class MarcarServicoSocialFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_servico_social_marcar, null);
-        Intent intent = new Intent(getContext())
+
         return view;
     }
 }

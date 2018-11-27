@@ -178,13 +178,6 @@ public class CadastroFaqActivity extends AppCompatActivity {
         }
     }
 
-    private boolean validaAddEdit(ItemFaq itemFaq) {
-        if ((itemFaq.getPergunta() == null || itemFaq.getPergunta() == "" || itemFaq.getPergunta().isEmpty()) ||
-                (itemFaq.getResposta() == null || itemFaq.getResposta() == "" || itemFaq.getResposta().isEmpty())) {
-            return false;
-        }
-        return true;
-    }
 
     private void limparCamposTexto() {
         edtPergunta.setText("");
