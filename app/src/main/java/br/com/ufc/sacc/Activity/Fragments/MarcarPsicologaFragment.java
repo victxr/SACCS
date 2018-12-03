@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,10 @@ import br.com.ufc.sacc.DAO.ConfiguracaoFirebase;
 import br.com.ufc.sacc.Model.ItemConsulta;
 import br.com.ufc.sacc.Model.ItemConsultaMarcada;
 import br.com.ufc.sacc.Model.ItemFaq;
+import br.com.ufc.sacc.Model.Usuario;
 import br.com.ufc.sacc.R;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
 
 import java.util.ArrayList;
@@ -31,7 +34,12 @@ public class MarcarPsicologaFragment extends Fragment {
     EditText edtMotivo;
     Button btnConfirmarConsultaPsicologa;
     ItemConsulta itemSelecionado;
+    ItemConsultaMarcada itemConsultaMarcada;
     int selected;
+
+    private FirebaseAuth autenticacao;
+    Usuario usuarioLogado;
+    String emailAlunoLogado;
 
     private ArrayList<ItemConsulta> listaItensPsicologa = new ArrayList<>();
     private ArrayAdapter<ItemConsulta> arrayAdapterItemConsulta;
@@ -57,16 +65,20 @@ public class MarcarPsicologaFragment extends Fragment {
                 selected = position;
             }
         });
+
         btnConfirmarConsultaPsicologa.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                ItemConsultaMarcada itemConsultaMarcada;
-                String marcada, tipo;
-                String uid;
+
+                pegaAlunoLogado();
+
+                String marcada, tipo, uid;
                 uid = UUID.randomUUID().toString();
                 marcada = itemSelecionado.getDiaDaSemana() + " " + itemSelecionado.getHorario();
-                itemConsultaMarcada = new ItemConsultaMarcada(uid, marcada, "Psicologa", edtMotivo.getText().toString());
+                itemConsultaMarcada = new ItemConsultaMarcada(uid, marcada, "Psicologa", edtMotivo.getText().toString(),
+                                                              usuarioLogado.getNome(), usuarioLogado.getRegistro());
+
                 databaseReference.child("ItemConsultaMarcada").child(itemConsultaMarcada.getUid()).setValue(itemConsultaMarcada);
                 alert("Item adicionado.");
 
@@ -82,6 +94,30 @@ public class MarcarPsicologaFragment extends Fragment {
         FirebaseApp.initializeApp(MarcarPsicologaFragment.this.getContext());
         fireBaseDatabase = ConfiguracaoFirebase.getFirebaseDatabase();
         databaseReference = ConfiguracaoFirebase.getFirebase();
+    }
+
+
+    private void pegaAlunoLogado() {
+        autenticacao = ConfiguracaoFirebase.getAutenticacaoFirebase();
+        emailAlunoLogado = autenticacao.getCurrentUser().getEmail();
+
+        databaseReference.child("usuario").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot objSnap : dataSnapshot.getChildren()) {
+                    Usuario usuarioBanco = objSnap.getValue(Usuario.class);
+
+                    if(usuarioBanco.getEmail().equals(emailAlunoLogado)){
+                        Log.d("Entrou", "ENtrou aqui");
+                        usuarioLogado = usuarioBanco;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
     }
 
     private void dispararAtualizacao() {

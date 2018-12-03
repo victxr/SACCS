@@ -40,7 +40,6 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-
         loadFragment(new HomeFragment());
     }
 

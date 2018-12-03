@@ -128,6 +128,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 firebaseLoginFacebook(loginResult.getAccessToken());
             }
 
+
             @Override
             public void onCancel() {
                 alert("Operação cancelada");
@@ -200,6 +201,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     private void validarLogin(){
         autenticacao = ConfiguracaoFirebase.getAutenticacaoFirebase();
+
         autenticacao.signInWithEmailAndPassword(usuario.getEmail(), usuario.getSenha()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
