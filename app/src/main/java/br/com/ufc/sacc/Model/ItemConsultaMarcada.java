@@ -1,9 +1,6 @@
 package br.com.ufc.sacc.Model;
 
-
-
 public class ItemConsultaMarcada {
-    private static int contadorId = 0;
 
     private String uid;
     private String data;
@@ -13,7 +10,6 @@ public class ItemConsultaMarcada {
 
     private String nomeAluno;
     private String matriculaAluno;
-
 
     public ItemConsultaMarcada(){}
 
