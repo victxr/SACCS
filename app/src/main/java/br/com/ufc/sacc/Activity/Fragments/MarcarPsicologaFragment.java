@@ -38,7 +38,7 @@ public class MarcarPsicologaFragment extends Fragment {
 
     private String emailAlunoLogado;
 
-    private ArrayList<Usuario> listaUsuariosLogados = new ArrayList<>();
+    private Usuario usuarioLogado = new Usuario();
     private ArrayList<ItemConsulta> listaItensPsicologa = new ArrayList<>();
     private ArrayAdapter<ItemConsulta> arrayAdapterItemConsulta;
 
@@ -76,7 +76,7 @@ public class MarcarPsicologaFragment extends Fragment {
                 uid = UUID.randomUUID().toString();
                 marcada = itemSelecionado.getDiaDaSemana() + " " + itemSelecionado.getHorario();
                 itemConsultaMarcada = new ItemConsultaMarcada(uid, marcada, tipo, edtMotivo.getText().toString(),
-                                                              listaUsuariosLogados.get(0).getNome(), listaUsuariosLogados.get(0).getRegistro());
+                                                              usuarioLogado.getNome(), usuarioLogado.getRegistro());
 
                 databaseReference.child("ItemConsultaMarcada").child(itemConsultaMarcada.getUid()).setValue(itemConsultaMarcada);
                 alert("Item adicionado.");
@@ -101,17 +101,18 @@ public class MarcarPsicologaFragment extends Fragment {
         autenticacao = ConfiguracaoFirebase.getAutenticacaoFirebase();
         emailAlunoLogado = autenticacao.getCurrentUser().getEmail();
 
-        Log.d("EMAIL DO CARA LOGADO:",   emailAlunoLogado);
 
         databaseReference.child("usuario").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                listaUsuariosLogados.clear();
+
                 for (DataSnapshot objSnap : dataSnapshot.getChildren()) {
                     Usuario usuario= objSnap.getValue(Usuario.class);
-                    Log.d("EMAIL DO CARA DO BANCO:", usuario.getEmail());
 
-                    if(usuario.getEmail().equals(emailAlunoLogado)) listaUsuariosLogados.add(usuario);
+                    if(usuario.getEmail().equals(emailAlunoLogado)) {
+                        usuarioLogado.setNome(usuario.getNome());
+                        usuarioLogado.setRegistro(usuario.getRegistro());
+                    }
                 }
 
             }
