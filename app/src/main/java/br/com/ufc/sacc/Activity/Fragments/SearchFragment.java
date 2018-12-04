@@ -34,9 +34,9 @@ public class SearchFragment extends Fragment {
     private FirebaseDatabase fireBaseDatabase;
     private DatabaseReference databaseReference;
     private ListView listViewConsultaMarcada;
-    private ArrayAdapter<ItemConsultaMarcada> arrayAdapterItemConsultaMarcada;
-    private ArrayList<ItemConsultaMarcada> listaMinhasConsultas = new ArrayList<>();
-    private ItemConsultaMarcada itemSelecionado;
+    private ArrayAdapter<String> arrayAdapterItemConsultaMarcada;
+    private ArrayList<String> listaMinhasConsultas = new ArrayList<>();
+    private String itemSelecionado;
     private Context context;
     private int selected;
     private Usuario usuarioLogado = new Usuario();
@@ -56,7 +56,7 @@ public class SearchFragment extends Fragment {
         listViewConsultaMarcada.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                itemSelecionado = (ItemConsultaMarcada) parent.getItemAtPosition(position);
+                itemSelecionado = (String) parent.getItemAtPosition(position);
 
                 selected = position;
             }
@@ -91,11 +91,13 @@ public class SearchFragment extends Fragment {
 
                     if(usuarioLogado.getRegistro() != null) {
                         if (itemConsultaMarcada.getMatriculaAluno().equals(usuarioLogado.getRegistro())) {
-                            listaMinhasConsultas.add(itemConsultaMarcada);
+                            String item = itemConsultaMarcada.getData()+" - "+itemConsultaMarcada.getTipo();
+                            listaMinhasConsultas.add(item);
                         }
                     }
                 }
-                arrayAdapterItemConsultaMarcada = new ArrayAdapter<ItemConsultaMarcada>(context, android.R.layout.simple_list_item_1, listaMinhasConsultas);
+
+                arrayAdapterItemConsultaMarcada = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, listaMinhasConsultas);
                 listViewConsultaMarcada.setAdapter(arrayAdapterItemConsultaMarcada);
             }
 

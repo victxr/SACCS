@@ -49,6 +49,7 @@ public class MarcarPsicologaFragment extends Fragment {
 
         iniciarFirebase();
         inicializarComponentes(view);
+        pegarUsuarioLogado();
         dispararAtualizacao();
 
         listViewConsulta.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -65,7 +66,6 @@ public class MarcarPsicologaFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 pegarUsuarioLogado();
-
                 String data, tipo = "Psicóloga", uid;
                 uid = UUID.randomUUID().toString();
                 data = itemSelecionado.getDiaDaSemana() + " " + itemSelecionado.getHorario();
@@ -105,17 +105,16 @@ public class MarcarPsicologaFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-
                 for (DataSnapshot objSnap : dataSnapshot.getChildren()) {
                     Usuario usuario= objSnap.getValue(Usuario.class);
 
                     if(usuario.getEmail().equals(emailAlunoLogado)) {
                         usuarioLogado.setNome(usuario.getNome());
                         usuarioLogado.setRegistro(usuario.getRegistro());
-                        Log.d("Email do cara do banco:", usuario.getEmail());
+                        Log.d("Nome do banco:", usuario.getNome());
+                        Log.d("Registro do  banco:", usuario.getRegistro());
                     }
                 }
-
             }
 
             @Override

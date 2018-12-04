@@ -49,6 +49,7 @@ public class MarcarNutricionistaFragment extends Fragment {
 
         iniciarFirebase();
         inicializarComponentes(view);
+        pegarUsuarioLogado();
         dispararAtualizacao();
 
         listViewConsulta.setOnItemClickListener(new AdapterView.OnItemClickListener() {
