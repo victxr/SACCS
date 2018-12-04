@@ -67,9 +67,9 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
             case R.id.nav_home:
                 fragment = new HomeFragment();
                 break;
-            case R.id.nav_profile:
-                fragment = new ProfileFragment();
-                break;
+//            case R.id.nav_profile:
+//                fragment = new ProfileFragment();
+//                break;
             case R.id.nav_search:
                 fragment = new SearchFragment();
                 break;
