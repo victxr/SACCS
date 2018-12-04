@@ -75,6 +75,7 @@ public class MarcarPsicologaFragment extends Fragment {
                 String marcada, tipo = "Psicóloga", uid;
                 uid = UUID.randomUUID().toString();
                 marcada = itemSelecionado.getDiaDaSemana() + " " + itemSelecionado.getHorario();
+                Log.d("Marcada: ", marcada);
                 itemConsultaMarcada = new ItemConsultaMarcada(uid, marcada, tipo, edtMotivo.getText().toString(),
                                                               usuarioLogado.getNome(), usuarioLogado.getRegistro());
 
@@ -100,11 +101,12 @@ public class MarcarPsicologaFragment extends Fragment {
     private void pegarUsuarioLogado() {
         autenticacao = ConfiguracaoFirebase.getAutenticacaoFirebase();
         emailAlunoLogado = autenticacao.getCurrentUser().getEmail();
-
+        Log.d("Email do cara logado:", emailAlunoLogado);
 
         databaseReference.child("usuario").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
 
                 for (DataSnapshot objSnap : dataSnapshot.getChildren()) {
                     Usuario usuario= objSnap.getValue(Usuario.class);
@@ -112,6 +114,7 @@ public class MarcarPsicologaFragment extends Fragment {
                     if(usuario.getEmail().equals(emailAlunoLogado)) {
                         usuarioLogado.setNome(usuario.getNome());
                         usuarioLogado.setRegistro(usuario.getRegistro());
+                        Log.d("Email do cara do banco:", usuario.getEmail());
                     }
                 }
 

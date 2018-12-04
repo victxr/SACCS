@@ -23,7 +23,7 @@ public class ItemConsultaMarcada {
         this.id = contadorId++;
 
         this.uid = uid;
-        this.marcada = this.marcada;
+        this.marcada = marcada;
         this.tipo = tipo;
         this.motivo = motivo;
         this.nomeAluno = nomeAluno;
