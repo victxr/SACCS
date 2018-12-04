@@ -12,60 +12,68 @@
         android:layout_marginRight="16dp"
         android:gravity="center"
         tools:context=".Activity.LoginActivity">
-    
-        <EditText
-                android:id="@+id/edtEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:hint="E-MAIL"/>
 
-        <EditText
+    <EditText
+            android:id="@+id/edtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:hint="E-MAIL"/>
+
+    <EditText
             android:id="@+id/edtSenha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:hint="SENHA"/>
 
-        <Button
-                android:id="@+id/btnLogar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="LOGIN"/>
+    <Button
+            android:id="@+id/btnLogar"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:text="LOGIN"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:background="@drawable/buttonshape"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:layout_marginBottom="10dp"/>
 
-         <com.facebook.login.widget.LoginButton
+    <com.facebook.login.widget.LoginButton
             android:id="@+id/btnLogarFacebook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="LOGIN COM FACEBOOK"/>
 
-        <com.google.android.gms.common.SignInButton
-                android:id="@+id/btnLogarGoogle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+    <com.google.android.gms.common.SignInButton
+            android:id="@+id/btnLogarGoogle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
-        <LinearLayout
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="20dp"
             android:gravity="center">
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Não tem cadastro?"
-                    android:textSize="15sp"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Não tem cadastro?"
+                android:textSize="15sp"/>
 
-            <TextView
-                    android:id="@+id/tvAbreCadastro"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="  Clique aqui?"
-                    android:textColor="@color/colorCliqueAqui"
-                    android:textSize="15sp"/>
+        <TextView
+                android:id="@+id/tvAbreCadastro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  Clique aqui?"
+                android:textColor="@color/colorCliqueAqui"
+                android:textSize="15sp"/>
 
-        </LinearLayout>
+    </LinearLayout>
 
 
 </LinearLayout>
