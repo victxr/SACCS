@@ -13,13 +13,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 import br.com.ufc.sacc.Activity.Fragments.*;
+import br.com.ufc.sacc.DAO.ConfiguracaoFirebase;
+import br.com.ufc.sacc.Model.Usuario;
 import br.com.ufc.sacc.R;
 
 public class PrincipalActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
+//    private TextView nomeUser, emailUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +44,19 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+//        nomeUser = findViewById(R.id.nomeUser);
+        //nomeUser.setText("eu");
+//        emailUser = findViewById(R.id.emailUser);
+//        setarDadosDePerfil();
+
         loadFragment(new HomeFragment());
     }
+
+//    private void setarDadosDePerfil() {
+//        Usuario user = ConfiguracaoFirebase.getUsuarioLogado();
+//
+//        emailUser.setText(user.getEmail());
+//    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
