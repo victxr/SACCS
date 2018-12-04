@@ -3,9 +3,7 @@ package br.com.ufc.sacc.Model;
 
 
 public class ItemConsulta {
-    private static int contadorId = 0;
 
-    private int id;
 
     private String uid;
     private String diaDaSemana;
@@ -16,21 +14,11 @@ public class ItemConsulta {
     public ItemConsulta(){}
 
     public ItemConsulta(String uid, String diaDaSemana, String horario, String tipo) {
-        this.id = contadorId++;
 
         this.uid = uid;
         this.diaDaSemana = diaDaSemana;
         this.horario = horario;
         this.tipo = tipo;
-    }
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getUid() {
