@@ -3,12 +3,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tela de consulta"
-            android:textSize="30sp"
-            android:layout_centerHorizontal="true"/>
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical">
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tela de consulta"
+                android:textSize="30sp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"/>
+
+        <ListView android:id="@+id/listViewConsultaMarcada"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content">
+
+        </ListView>
+    </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
 

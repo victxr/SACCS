@@ -6,7 +6,7 @@ public class ItemConsultaMarcada {
     private static int contadorId = 0;
 
     private String uid;
-    private String marcada;
+    private String data;
 
     private String tipo;
     private String motivo;
@@ -17,9 +17,9 @@ public class ItemConsultaMarcada {
 
     public ItemConsultaMarcada(){}
 
-    public ItemConsultaMarcada(String uid, String marcada, String tipo, String motivo, String nomeAluno, String matriculaAluno) {
+    public ItemConsultaMarcada(String uid, String data, String tipo, String motivo, String nomeAluno, String matriculaAluno) {
         this.uid = uid;
-        this.marcada = marcada;
+        this.data = data;
         this.tipo = tipo;
         this.motivo = motivo;
         this.nomeAluno = nomeAluno;
@@ -43,12 +43,12 @@ public class ItemConsultaMarcada {
         this.uid = uid;
     }
 
-    public String getMarcada() {
-        return marcada;
+    public String getData() {
+        return data;
     }
 
-    public void setMarcada(String marcada) {
-        this.marcada = marcada;
+    public void setData(String data) {
+        this.data = data;
     }
 
     public String getNomeAluno() {
@@ -78,6 +78,6 @@ public class ItemConsultaMarcada {
     @Override
     public String toString() {
 
-        return marcada;
+        return data;
     }
 }

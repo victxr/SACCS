@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.*;
 import br.com.ufc.sacc.DAO.ConfiguracaoFirebase;
 import br.com.ufc.sacc.Model.ItemConsulta;
+import br.com.ufc.sacc.Model.ItemConsultaMarcada;
 import br.com.ufc.sacc.Model.ItemFaq;
 import br.com.ufc.sacc.R;
 import com.google.firebase.FirebaseApp;
@@ -34,7 +35,7 @@ public class CadastroConsultaActivity extends AppCompatActivity {
     private ArrayList<ItemConsulta> listaItens = new ArrayList<>();
     private ArrayAdapter<ItemConsulta> arrayAdapterItemConsulta;
 
-    ItemFaq itemSelecionado;
+    ItemConsulta itemSelecionado;
     int posicao;
     int posicaoDiaDaSemana;
 
@@ -55,7 +56,7 @@ public class CadastroConsultaActivity extends AppCompatActivity {
         listViewConsulta.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                itemSelecionado = (ItemFaq) parent.getItemAtPosition(position);
+                itemSelecionado = (ItemConsulta) parent.getItemAtPosition(position);
 
                 selected = position;
             }

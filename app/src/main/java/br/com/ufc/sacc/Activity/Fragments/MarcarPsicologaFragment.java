@@ -46,15 +46,9 @@ public class MarcarPsicologaFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_psicologa_marcar, null);
-        context = view.getContext();
-        listViewConsulta = view.findViewById(R.id.listViewConsultaPsicologa);
-        listViewConsulta.setSelector(android.R.color.holo_green_light);
-        edtMotivo = view.findViewById(R.id.motivo);
-
-
-        btnConfirmarConsultaPsicologa = view.findViewById(R.id.btnConfirmarConsultaPsicologa);
 
         iniciarFirebase();
+        inicializarComponentes(view);
         dispararAtualizacao();
 
         listViewConsulta.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -72,23 +66,27 @@ public class MarcarPsicologaFragment extends Fragment {
             public void onClick(View v) {
                 pegarUsuarioLogado();
 
-                String marcada, tipo = "Psicóloga", uid;
+                String data, tipo = "Psicóloga", uid;
                 uid = UUID.randomUUID().toString();
-                marcada = itemSelecionado.getDiaDaSemana() + " " + itemSelecionado.getHorario();
-                Log.d("Marcada: ", marcada);
-                itemConsultaMarcada = new ItemConsultaMarcada(uid, marcada, tipo, edtMotivo.getText().toString(),
+                data = itemSelecionado.getDiaDaSemana() + " " + itemSelecionado.getHorario();
+                Log.d("Marcada: ", data);
+                itemConsultaMarcada = new ItemConsultaMarcada(uid, data, tipo, edtMotivo.getText().toString(),
                                                               usuarioLogado.getNome(), usuarioLogado.getRegistro());
 
                 databaseReference.child("ItemConsultaMarcada").child(itemConsultaMarcada.getUid()).setValue(itemConsultaMarcada);
-                alert("Item adicionado.");
+                alert("Consulta marcada.");
 
                 limparCamposTexto();
             }
         });
         return view;
     }
-    private void inicializarComponentes(){
-
+    private void inicializarComponentes(View view){
+        context = view.getContext();
+        listViewConsulta = view.findViewById(R.id.listViewConsultaPsicologa);
+        listViewConsulta.setSelector(android.R.color.holo_green_light);
+        edtMotivo = view.findViewById(R.id.motivo);
+        btnConfirmarConsultaPsicologa = view.findViewById(R.id.btnConfirmarConsultaPsicologa);
     }
 
     private void iniciarFirebase() {

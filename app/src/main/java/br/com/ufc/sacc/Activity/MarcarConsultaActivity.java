@@ -1,14 +1,11 @@
 package br.com.ufc.sacc.Activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
 import br.com.ufc.sacc.Activity.Fragments.*;
 import br.com.ufc.sacc.R;
 
