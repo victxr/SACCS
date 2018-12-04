@@ -10,12 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
-import br.com.ufc.sacc.Activity.Adapter.ExpandableListAdapter;
-import br.com.ufc.sacc.Activity.CadastroConsultaActivity;
 import br.com.ufc.sacc.DAO.ConfiguracaoFirebase;
 import br.com.ufc.sacc.Model.ItemConsulta;
 import br.com.ufc.sacc.Model.ItemConsultaMarcada;
-import br.com.ufc.sacc.Model.ItemFaq;
 import br.com.ufc.sacc.Model.Usuario;
 import br.com.ufc.sacc.R;
 import com.google.firebase.FirebaseApp;
@@ -38,9 +35,10 @@ public class MarcarPsicologaFragment extends Fragment {
     int selected;
 
     private FirebaseAuth autenticacao;
-    Usuario usuarioLogado;
-    String emailAlunoLogado;
 
+    private String emailAlunoLogado;
+
+    private ArrayList<Usuario> listaUsuariosLogados = new ArrayList<>();
     private ArrayList<ItemConsulta> listaItensPsicologa = new ArrayList<>();
     private ArrayAdapter<ItemConsulta> arrayAdapterItemConsulta;
 
@@ -53,7 +51,9 @@ public class MarcarPsicologaFragment extends Fragment {
         listViewConsulta.setSelector(android.R.color.holo_green_light);
         edtMotivo = view.findViewById(R.id.motivo);
 
+
         btnConfirmarConsultaPsicologa = view.findViewById(R.id.btnConfirmarConsultaPsicologa);
+
         iniciarFirebase();
         dispararAtualizacao();
 
@@ -70,14 +70,13 @@ public class MarcarPsicologaFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
+                pegarUsuarioLogado();
 
-                pegaAlunoLogado();
-
-                String marcada, tipo, uid;
+                String marcada, tipo = "Psicóloga", uid;
                 uid = UUID.randomUUID().toString();
                 marcada = itemSelecionado.getDiaDaSemana() + " " + itemSelecionado.getHorario();
-                itemConsultaMarcada = new ItemConsultaMarcada(uid, marcada, "Psicologa", edtMotivo.getText().toString(),
-                                                              usuarioLogado.getNome(), usuarioLogado.getRegistro());
+                itemConsultaMarcada = new ItemConsultaMarcada(uid, marcada, tipo, edtMotivo.getText().toString(),
+                                                              listaUsuariosLogados.get(0).getNome(), listaUsuariosLogados.get(0).getRegistro());
 
                 databaseReference.child("ItemConsultaMarcada").child(itemConsultaMarcada.getUid()).setValue(itemConsultaMarcada);
                 alert("Item adicionado.");
@@ -90,6 +89,7 @@ public class MarcarPsicologaFragment extends Fragment {
     private void inicializarComponentes(){
 
     }
+
     private void iniciarFirebase() {
         FirebaseApp.initializeApp(MarcarPsicologaFragment.this.getContext());
         fireBaseDatabase = ConfiguracaoFirebase.getFirebaseDatabase();
@@ -97,21 +97,23 @@ public class MarcarPsicologaFragment extends Fragment {
     }
 
 
-    private void pegaAlunoLogado() {
+    private void pegarUsuarioLogado() {
         autenticacao = ConfiguracaoFirebase.getAutenticacaoFirebase();
         emailAlunoLogado = autenticacao.getCurrentUser().getEmail();
+
+        Log.d("EMAIL DO CARA LOGADO:",   emailAlunoLogado);
 
         databaseReference.child("usuario").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listaUsuariosLogados.clear();
                 for (DataSnapshot objSnap : dataSnapshot.getChildren()) {
-                    Usuario usuarioBanco = objSnap.getValue(Usuario.class);
+                    Usuario usuario= objSnap.getValue(Usuario.class);
+                    Log.d("EMAIL DO CARA DO BANCO:", usuario.getEmail());
 
-                    if(usuarioBanco.getEmail().equals(emailAlunoLogado)){
-                        Log.d("Entrou", "ENtrou aqui");
-                        usuarioLogado = usuarioBanco;
-                    }
+                    if(usuario.getEmail().equals(emailAlunoLogado)) listaUsuariosLogados.add(usuario);
                 }
+
             }
 
             @Override
