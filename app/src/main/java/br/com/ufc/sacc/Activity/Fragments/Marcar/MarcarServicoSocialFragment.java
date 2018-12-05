@@ -1,4 +1,4 @@
-package br.com.ufc.sacc.Activity.Fragments;
+package br.com.ufc.sacc.Activity.Fragments.Marcar;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -22,30 +22,30 @@ import com.google.firebase.database.*;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class MarcarNutricionistaFragment extends Fragment {
+public class MarcarServicoSocialFragment extends Fragment {
 
-    private FirebaseDatabase fireBaseDatabase;
-    private DatabaseReference databaseReference;
-    private ListView listViewConsulta;
-    private Context context;
-    private EditText edtMotivo;
-    private Button btnConfirmarConsultaNutricionista;
-    private ItemConsulta itemSelecionado;
-    private ItemConsultaMarcada itemConsultaMarcada;
-    private int selected;
+    FirebaseDatabase fireBaseDatabase;
+    DatabaseReference databaseReference;
+    ListView listViewConsulta;
+    Context context;
+    EditText edtMotivo;
+    Button btnConfirmarConsultaSocial;
+    ItemConsulta itemSelecionado;
+    ItemConsultaMarcada itemConsultaMarcada;
+    int selected;
 
     private FirebaseAuth autenticacao;
 
     private String emailAlunoLogado;
 
     private Usuario usuarioLogado = new Usuario();
-    private ArrayList<ItemConsulta> listaItensNutricionista = new ArrayList<>();
+    private ArrayList<ItemConsulta> listaItensSocial = new ArrayList<>();
     private ArrayAdapter<ItemConsulta> arrayAdapterItemConsulta;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_nutricionista_marcar, null);
+        View view = inflater.inflate(R.layout.fragment_servico_social_marcar, null);
 
         iniciarFirebase();
         inicializarComponentes(view);
@@ -61,18 +61,18 @@ public class MarcarNutricionistaFragment extends Fragment {
             }
         });
 
-        btnConfirmarConsultaNutricionista.setOnClickListener(new View.OnClickListener() {
+        btnConfirmarConsultaSocial.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 pegarUsuarioLogado();
 
-                String data, tipo = "Nutricionista", uid;
+                String data, tipo = "Serviço Social", uid;
                 uid = UUID.randomUUID().toString();
                 data = itemSelecionado.getDiaDaSemana() + " " + itemSelecionado.getHorario();
                 Log.d("Marcada: ", data);
                 itemConsultaMarcada = new ItemConsultaMarcada(uid, data, tipo, edtMotivo.getText().toString(),
-                                                              usuarioLogado.getNome(), usuarioLogado.getRegistro());
+                        usuarioLogado.getNome(), usuarioLogado.getRegistro());
 
                 databaseReference.child("ItemConsultaMarcada").child(itemConsultaMarcada.getUid()).setValue(itemConsultaMarcada);
                 alert("Consulta marcada.");
@@ -84,14 +84,14 @@ public class MarcarNutricionistaFragment extends Fragment {
     }
     private void inicializarComponentes(View view){
         context = view.getContext();
-        listViewConsulta = view.findViewById(R.id.listViewConsultaNutricionista);
+        listViewConsulta = view.findViewById(R.id.listViewConsultaSocial);
         listViewConsulta.setSelector(android.R.color.holo_green_light);
         edtMotivo = view.findViewById(R.id.motivo);
-        btnConfirmarConsultaNutricionista = view.findViewById(R.id.btnConfirmarConsultaNutricionista);
+        btnConfirmarConsultaSocial = view.findViewById(R.id.btnConfirmarConsultaSocial);
     }
 
     private void iniciarFirebase() {
-        FirebaseApp.initializeApp(MarcarNutricionistaFragment.this.getContext());
+        FirebaseApp.initializeApp(MarcarServicoSocialFragment.this.getContext());
         fireBaseDatabase = ConfiguracaoFirebase.getFirebaseDatabase();
         databaseReference = ConfiguracaoFirebase.getFirebase();
     }
@@ -129,13 +129,13 @@ public class MarcarNutricionistaFragment extends Fragment {
         databaseReference.child("ItemConsulta").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                listaItensNutricionista.clear();
+                listaItensSocial.clear();
                 for (DataSnapshot objSnap : dataSnapshot.getChildren()) {
                     ItemConsulta itemConsulta = objSnap.getValue(ItemConsulta.class);
 
-                    if(itemConsulta.getTipo().equals("Nutrição")) listaItensNutricionista.add(itemConsulta);
+                    if(itemConsulta.getTipo().equals("Assistente Social")) listaItensSocial.add(itemConsulta);
                 }
-                arrayAdapterItemConsulta = new ArrayAdapter<ItemConsulta>(context, android.R.layout.simple_list_item_1, listaItensNutricionista);
+                arrayAdapterItemConsulta = new ArrayAdapter<ItemConsulta>(context, android.R.layout.simple_list_item_1, listaItensSocial);
                 listViewConsulta.setAdapter(arrayAdapterItemConsulta);
             }
 

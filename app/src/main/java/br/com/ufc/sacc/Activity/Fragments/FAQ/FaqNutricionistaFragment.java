@@ -1,4 +1,4 @@
-package br.com.ufc.sacc.Activity.Fragments;
+package br.com.ufc.sacc.Activity.Fragments.FAQ;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -17,7 +17,7 @@ import com.google.firebase.database.*;
 
 import java.util.ArrayList;
 
-public class ServicoSocialFragment extends Fragment {
+public class FaqNutricionistaFragment extends Fragment {
 
     int selected;
     ArrayList<ItemFaq> listaItens;
@@ -32,11 +32,11 @@ public class ServicoSocialFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_servico_social, null);
+        View view = inflater.inflate(R.layout.fragment_nutricionista, null);
 
         context = view.getContext();
 
-        expandableListViewItens = view.findViewById(R.id.listViewServicoSocial);
+        expandableListViewItens = view.findViewById(R.id.listViewNutricionista);
         expandableListViewItens.setSelector( android.R.color.holo_green_light);
 
         inicializarComponentes();
@@ -68,12 +68,15 @@ public class ServicoSocialFragment extends Fragment {
                 for(DataSnapshot objSnap: dataSnapshot.getChildren()){
                     ItemFaq itemFaq = objSnap.getValue(ItemFaq.class);
 
-                    if(itemFaq.getTipo().equals("Assistente Social")) listaItens.add(itemFaq);
+                    if(itemFaq.getTipo().equals("Nutrição")) listaItens.add(itemFaq);
 
                 }
                 adapter = new ExpandableListAdapter(context, listaItens);
                 expandableListViewItens.setAdapter(adapter);
 
+//                getActivity()
+//                getContext();
+//                parent.getContext()
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {}

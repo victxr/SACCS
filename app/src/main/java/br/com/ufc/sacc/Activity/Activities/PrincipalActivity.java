@@ -1,4 +1,4 @@
-package br.com.ufc.sacc.Activity;
+package br.com.ufc.sacc.Activity.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,33 +10,51 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-import br.com.ufc.sacc.Activity.Fragments.*;
+import br.com.ufc.sacc.Activity.Fragments.NavigationDrawer.*;
 import br.com.ufc.sacc.DAO.ConfiguracaoFirebase;
 import br.com.ufc.sacc.Model.Usuario;
 import br.com.ufc.sacc.R;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.*;
 
 public class PrincipalActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
-//    private TextView nomeUser, emailUser;
+    private FirebaseDatabase fireBaseDatabase;
+    private DatabaseReference databaseReference;
+    private FirebaseAuth autenticacao;
+    private String emailAlunoLogado;
+    private Usuario usuarioLogado = new Usuario();
+    private TextView nomeUser, emailUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
+        iniciarFirebase();
+        pegarUsuarioLogado();
+
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         drawer = findViewById(R.id.drawer_layout);
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View header = navigationView.getHeaderView(0);
+        nomeUser = (TextView) header.findViewById(R.id.nomeUser);
+
+        emailUser = (TextView) header.findViewById(R.id.emailUser);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -44,19 +62,9 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-//        nomeUser = findViewById(R.id.nomeUser);
-        //nomeUser.setText("eu");
-//        emailUser = findViewById(R.id.emailUser);
-//        setarDadosDePerfil();
 
         loadFragment(new HomeFragment());
     }
-
-//    private void setarDadosDePerfil() {
-//        Usuario user = ConfiguracaoFirebase.getUsuarioLogado();
-//
-//        emailUser.setText(user.getEmail());
-//    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -142,5 +150,37 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         } else {
             this.moveTaskToBack(true);
         }
+    }
+
+    private void iniciarFirebase() {
+        FirebaseApp.initializeApp(PrincipalActivity.this);
+        fireBaseDatabase = ConfiguracaoFirebase.getFirebaseDatabase();
+        databaseReference = ConfiguracaoFirebase.getFirebase();
+    }
+
+    private void pegarUsuarioLogado() {
+        autenticacao = ConfiguracaoFirebase.getAutenticacaoFirebase();
+        emailAlunoLogado = autenticacao.getCurrentUser().getEmail();
+        Log.d("Email do cara logado:", emailAlunoLogado);
+
+        databaseReference.child("usuario").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot objSnap : dataSnapshot.getChildren()) {
+                    usuarioLogado = objSnap.getValue(Usuario.class);
+
+                    if(usuarioLogado.getEmail().equals(emailAlunoLogado)) {
+                        nomeUser.setText(usuarioLogado.getNome());
+                        emailUser.setText(usuarioLogado.getEmail());
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
     }
 }

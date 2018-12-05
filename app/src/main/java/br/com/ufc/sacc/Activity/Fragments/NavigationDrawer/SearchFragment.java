@@ -1,4 +1,4 @@
-package br.com.ufc.sacc.Activity.Fragments;
+package br.com.ufc.sacc.Activity.Fragments.NavigationDrawer;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,13 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import br.com.ufc.sacc.Activity.FaqActivity;
-import br.com.ufc.sacc.Activity.MarcarConsultaActivity;
-import br.com.ufc.sacc.Activity.PrincipalActivity;
+import br.com.ufc.sacc.Activity.Activities.MarcarConsultaActivity;
 import br.com.ufc.sacc.DAO.ConfiguracaoFirebase;
-import br.com.ufc.sacc.Model.ItemConsulta;
 import br.com.ufc.sacc.Model.ItemConsultaMarcada;
 import br.com.ufc.sacc.Model.Usuario;
 import br.com.ufc.sacc.R;

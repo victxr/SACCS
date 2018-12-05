@@ -82,7 +82,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public long getChildId(int groupPosition, int childPosition) {
-        return itensDeFaq.get(groupPosition).getId();
+        return childPosition;
     }
 
     @Override
@@ -102,6 +102,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        return -1;
+        return 1;
     }
 }

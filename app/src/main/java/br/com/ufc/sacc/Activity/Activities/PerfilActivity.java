@@ -1,4 +1,4 @@
-package br.com.ufc.sacc.Activity;
+package br.com.ufc.sacc.Activity.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;

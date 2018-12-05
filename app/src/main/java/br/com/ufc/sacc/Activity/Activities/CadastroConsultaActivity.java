@@ -1,9 +1,8 @@
-package br.com.ufc.sacc.Activity;
+package br.com.ufc.sacc.Activity.Activities;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,8 +10,6 @@ import android.view.View;
 import android.widget.*;
 import br.com.ufc.sacc.DAO.ConfiguracaoFirebase;
 import br.com.ufc.sacc.Model.ItemConsulta;
-import br.com.ufc.sacc.Model.ItemConsultaMarcada;
-import br.com.ufc.sacc.Model.ItemFaq;
 import br.com.ufc.sacc.R;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.*;
@@ -22,27 +19,28 @@ import java.util.UUID;
 
 public class CadastroConsultaActivity extends AppCompatActivity {
 
-    int selected;
-    ListView listViewConsulta;
-    Spinner spinner;
-    Spinner spinnerDiaDaSemana;
+    private int selected;
+    private ListView listViewConsulta;
+    private Spinner spinnerFuncao;
+    private Spinner spinnerDiaDaSemana;
+
     final String[] spinerListFuncao = {"Assistente Social", "Psicologia", "Nutrição"};
     final String[] spinerDiaDaSemana = {"Segunda", "Terça", "Quarta", "Quinta", "Sexta"};
 
-    FirebaseDatabase fireBaseDatabase;
-    DatabaseReference databaseReference;
+    private FirebaseDatabase fireBaseDatabase;
+    private DatabaseReference databaseReference;
 
     private ArrayList<ItemConsulta> listaItens = new ArrayList<>();
     private ArrayAdapter<ItemConsulta> arrayAdapterItemConsulta;
 
-    ItemConsulta itemSelecionado;
-    int posicao;
-    int posicaoDiaDaSemana;
+    private ItemConsulta itemSelecionado;
+    private int posicao;
+    private int posicaoDiaDaSemana;
 
-    CheckBox ab_manha;
-    CheckBox cd_manha;
-    CheckBox ab_tarde;
-    CheckBox cd_tarde;
+    private CheckBox ab_manha;
+    private CheckBox cd_manha;
+    private CheckBox ab_tarde;
+    private CheckBox cd_tarde;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +60,10 @@ public class CadastroConsultaActivity extends AppCompatActivity {
             }
         });
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerFuncao.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                posicao = spinner.getSelectedItemPosition();
+                posicao = spinnerFuncao.getSelectedItemPosition();
 
             }
 
@@ -98,14 +96,15 @@ public class CadastroConsultaActivity extends AppCompatActivity {
         listViewConsulta = findViewById(R.id.listViewConsulta);
         listViewConsulta.setSelector(android.R.color.holo_green_light);
 
-        spinner = findViewById(R.id.edtFuncao);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(CadastroConsultaActivity.this, android.R.layout.simple_dropdown_item_1line, spinerListFuncao);
-        spinner.setAdapter(adapter);
+        spinnerFuncao = findViewById(R.id.edtFuncao);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(CadastroConsultaActivity.this,
+                                                          android.R.layout.simple_dropdown_item_1line, spinerListFuncao);
+        spinnerFuncao.setAdapter(adapter);
 
         spinnerDiaDaSemana = findViewById(R.id.edtDiaDaSemana);
-        ArrayAdapter<String> adapterDiaDaSemana = new ArrayAdapter<>(CadastroConsultaActivity.this, android.R.layout.simple_dropdown_item_1line, spinerDiaDaSemana);
+        ArrayAdapter<String> adapterDiaDaSemana = new ArrayAdapter<>(CadastroConsultaActivity.this,
+                                                                     android.R.layout.simple_dropdown_item_1line, spinerDiaDaSemana);
         spinnerDiaDaSemana.setAdapter(adapterDiaDaSemana);
-
     }
 
     private void iniciarFirebase() {
@@ -124,7 +123,7 @@ public class CadastroConsultaActivity extends AppCompatActivity {
 
                     listaItens.add(itemConsulta);
                 }
-                arrayAdapterItemConsulta = new ArrayAdapter<ItemConsulta>(CadastroConsultaActivity.this, android.R.layout.simple_list_item_1, listaItens);
+                arrayAdapterItemConsulta = new ArrayAdapter<>(CadastroConsultaActivity.this, android.R.layout.simple_list_item_1, listaItens);
                 listViewConsulta.setAdapter(arrayAdapterItemConsulta);
             }
 

@@ -1,29 +1,32 @@
-package br.com.ufc.sacc.Activity;
+package br.com.ufc.sacc.Activity.Activities;
 
-import android.os.Bundle;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.MenuItem;
-import br.com.ufc.sacc.Activity.Fragments.*;
+import br.com.ufc.sacc.Activity.Fragments.FAQ.FaqNutricionistaFragment;
+import br.com.ufc.sacc.Activity.Fragments.FAQ.FaqPsicologaFragment;
+import br.com.ufc.sacc.Activity.Fragments.FAQ.FaqServicoSocialFragment;
 import br.com.ufc.sacc.R;
+import br.com.ufc.sacc.ServicesBroadcasts.ServiceDownloadFaq;
 
-public class MarcarConsultaActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
-
+public class FaqActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_marcar);
+        setContentView(R.layout.activity_faq);
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.item_psicologa);
 
-        loadFragment(new MarcarPsicologaFragment());
+        loadFragment(new FaqPsicologaFragment());
     }
 
     @Override
@@ -32,15 +35,17 @@ public class MarcarConsultaActivity extends AppCompatActivity implements BottomN
 
         switch(menuItem.getItemId()){
             case R.id.item_psicologa:
-                fragment = new MarcarPsicologaFragment();
+                fragment = new FaqPsicologaFragment();
+                Intent intent = new Intent(FaqActivity.this, ServiceDownloadFaq.class);
+                startService(intent);
                 break;
 
             case R.id.item_nutricionista:
-                fragment = new MarcarNutricionistaFragment();
+                fragment = new FaqNutricionistaFragment();
                 break;
 
             case R.id.item_servico_social:
-                fragment = new MarcarServicoSocialFragment();
+                fragment = new FaqServicoSocialFragment();
                 break;
         }
         return loadFragment(fragment);

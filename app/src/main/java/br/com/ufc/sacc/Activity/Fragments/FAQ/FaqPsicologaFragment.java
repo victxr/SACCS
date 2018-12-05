@@ -1,4 +1,4 @@
-package br.com.ufc.sacc.Activity.Fragments;
+package br.com.ufc.sacc.Activity.Fragments.FAQ;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -17,27 +17,26 @@ import com.google.firebase.database.*;
 
 import java.util.ArrayList;
 
-public class NutricionistaFragment extends Fragment {
+public class FaqPsicologaFragment extends Fragment {
 
-    int selected;
-    ArrayList<ItemFaq> listaItens;
+     int selected;
+     ArrayList<ItemFaq> listaItens;
 
-    ExpandableListAdapter adapter;
-    ExpandableListView expandableListViewItens;
-    FirebaseDatabase fireBaseDatabase;
-    DatabaseReference databaseReference;
+     ExpandableListAdapter adapter;
+     ExpandableListView expandableListViewItens;
+     FirebaseDatabase fireBaseDatabase;
+     DatabaseReference databaseReference;
 
     Context context;
+
+    View view;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_nutricionista, null);
+         view = inflater.inflate(R.layout.fragment_psicologa, null);
 
         context = view.getContext();
-
-        expandableListViewItens = view.findViewById(R.id.listViewNutricionista);
-        expandableListViewItens.setSelector( android.R.color.holo_green_light);
 
         inicializarComponentes();
         iniciarFirebase();
@@ -57,10 +56,14 @@ public class NutricionistaFragment extends Fragment {
     private void inicializarComponentes() {
         selected = -1;
 
+        expandableListViewItens = view.findViewById(R.id.listViewPsicologa);
+        expandableListViewItens.setSelector( android.R.color.holo_green_light);
+
         listaItens = new ArrayList<ItemFaq>();
     }
 
     private void dispararAtualizacao() {
+
         databaseReference.child("ItemFaq").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -68,15 +71,12 @@ public class NutricionistaFragment extends Fragment {
                 for(DataSnapshot objSnap: dataSnapshot.getChildren()){
                     ItemFaq itemFaq = objSnap.getValue(ItemFaq.class);
 
-                    if(itemFaq.getTipo().equals("Nutrição")) listaItens.add(itemFaq);
+                    if(itemFaq.getTipo().equals("Psicologia")) listaItens.add(itemFaq);
 
                 }
                 adapter = new ExpandableListAdapter(context, listaItens);
                 expandableListViewItens.setAdapter(adapter);
 
-//                getActivity()
-//                getContext();
-//                parent.getContext()
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {}

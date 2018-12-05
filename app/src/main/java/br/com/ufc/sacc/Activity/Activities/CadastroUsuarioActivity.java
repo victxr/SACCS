@@ -1,4 +1,4 @@
-package br.com.ufc.sacc.Activity;
+package br.com.ufc.sacc.Activity.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,10 +14,9 @@ import br.com.ufc.sacc.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.*;
-import android.support.v4.app.Fragment;
 import android.widget.Spinner;
 
-public class CadastroActivity extends AppCompatActivity {
+public class CadastroUsuarioActivity extends AppCompatActivity {
 
     private EditText edtCadNome;
     private EditText edtCadEmail;
@@ -29,11 +28,6 @@ public class CadastroActivity extends AppCompatActivity {
     private RadioButton rbAluno;
     private RadioButton rbServidor;
     private Button btnGravar;
-
-    private EditText edtCadMatricula;
-    private EditText edtCadSiac;
-    private Spinner edtCadCurso;
-    private Spinner edtCadFuncao;
 
     private Usuario usuario;
 
@@ -77,10 +71,9 @@ public class CadastroActivity extends AppCompatActivity {
 
     private void cadastrarUsuario() {
         autenticacao = ConfiguracaoFirebase.getAutenticacaoFirebase();
-        autenticacao.createUserWithEmailAndPassword(
-                usuario.getEmail(),
-                usuario.getSenha()
-        ).addOnCompleteListener(CadastroActivity.this, new OnCompleteListener<AuthResult>() {
+        autenticacao.createUserWithEmailAndPassword(usuario.getEmail(),usuario.getSenha()
+
+        ).addOnCompleteListener(CadastroUsuarioActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
@@ -91,7 +84,7 @@ public class CadastroActivity extends AppCompatActivity {
                     usuario.setId(identificadorUsuario);
                     usuario.salvar();
 
-                    Preferencias preferencias = new Preferencias(CadastroActivity.this);
+                    Preferencias preferencias = new Preferencias(CadastroUsuarioActivity.this);
                     preferencias.salvarUsuarioPreferencias(identificadorUsuario, usuario.getNome());
 
                     abrirLoginUsuario();
@@ -118,7 +111,7 @@ public class CadastroActivity extends AppCompatActivity {
     }
 
     public void abrirLoginUsuario() {
-        Intent intent = new Intent(CadastroActivity.this, LoginActivity.class);
+        Intent intent = new Intent(CadastroUsuarioActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
     }
@@ -169,6 +162,7 @@ public class CadastroActivity extends AppCompatActivity {
     private void inicializarComponentes() {
         edtCadNome = findViewById(R.id.edtCadNome);
         edtCadEmail = findViewById(R.id.edtCadEmail);
+        edtCadRegistro = findViewById(R.id.edtCadRegistro);
         edtCadSenha = findViewById(R.id.edtCadSenha);
         edtCadConfirmaSenha = findViewById(R.id.edtCadConfirmaSenha);
         rbMasculino = findViewById(R.id.rbMasculino);
@@ -176,6 +170,5 @@ public class CadastroActivity extends AppCompatActivity {
         rbAluno = findViewById(R.id.rbAluno);
         rbServidor= findViewById(R.id.rbServidor);
         btnGravar = findViewById(R.id.btnGravar);
-        edtCadRegistro = findViewById(R.id.edtCadRegistro);
     }
 }

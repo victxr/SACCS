@@ -1,4 +1,4 @@
-package br.com.ufc.sacc.Activity;
+package br.com.ufc.sacc.Activity.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

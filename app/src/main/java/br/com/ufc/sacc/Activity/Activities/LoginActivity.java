@@ -1,4 +1,4 @@
-package br.com.ufc.sacc.Activity;
+package br.com.ufc.sacc.Activity.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -236,7 +236,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     public void abrirTelaCadastroUsuario(){
-        Intent intent = new Intent(LoginActivity.this, CadastroActivity.class);
+        Intent intent = new Intent(LoginActivity.this, CadastroUsuarioActivity.class);
         startActivity(intent);
     }
 

@@ -11,7 +11,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:gravity="center"
-        tools:context=".Activity.LoginActivity">
+        tools:context=".Activity.Activities.LoginActivity">
 
     <EditText
             android:id="@+id/edtEmail"

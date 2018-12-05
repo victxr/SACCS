@@ -15,7 +15,8 @@
                 android:layout_height="wrap_content"
                 android:text="Texto de horario"
                 android:textStyle="italic"
-                android:textSize="17dp"/>
+                android:textSize="17dp"
+        android:layout_margin="5dp"/>
 
     </LinearLayout>
 

@@ -1,4 +1,4 @@
-package br.com.ufc.sacc.Activity.Fragments;
+package br.com.ufc.sacc.Activity.Fragments.NavigationDrawer;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

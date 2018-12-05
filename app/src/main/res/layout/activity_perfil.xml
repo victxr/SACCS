@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        tools:context=".Activity.PerfilActivity">
+        tools:context=".Activity.Activities.PerfilActivity">
 
     <ImageView
             android:layout_width="match_parent"

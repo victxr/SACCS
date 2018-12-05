@@ -1,33 +1,31 @@
-package br.com.ufc.sacc.Activity;
+package br.com.ufc.sacc.Activity.Activities;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import br.com.ufc.sacc.Activity.Fragments.NutricionistaFragment;
-import br.com.ufc.sacc.Activity.Fragments.PsicologaFragment;
-import br.com.ufc.sacc.Activity.Fragments.ServicoSocialFragment;
+import br.com.ufc.sacc.Activity.Fragments.Marcar.MarcarNutricionistaFragment;
+import br.com.ufc.sacc.Activity.Fragments.Marcar.MarcarPsicologaFragment;
+import br.com.ufc.sacc.Activity.Fragments.Marcar.MarcarServicoSocialFragment;
 import br.com.ufc.sacc.R;
-import br.com.ufc.sacc.ServicesBroadcasts.ServiceDownloadFaq;
 
-public class FaqActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class MarcarConsultaActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
+
 
     BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_faq);
+        setContentView(R.layout.activity_marcar);
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.item_psicologa);
 
-        loadFragment(new PsicologaFragment());
+        loadFragment(new MarcarPsicologaFragment());
     }
 
     @Override
@@ -36,17 +34,15 @@ public class FaqActivity extends AppCompatActivity implements BottomNavigationVi
 
         switch(menuItem.getItemId()){
             case R.id.item_psicologa:
-                fragment = new PsicologaFragment();
-                Intent intent = new Intent(FaqActivity.this, ServiceDownloadFaq.class);
-                startService(intent);
+                fragment = new MarcarPsicologaFragment();
                 break;
 
             case R.id.item_nutricionista:
-                fragment = new NutricionistaFragment();
+                fragment = new MarcarNutricionistaFragment();
                 break;
 
             case R.id.item_servico_social:
-                fragment = new ServicoSocialFragment();
+                fragment = new MarcarServicoSocialFragment();
                 break;
         }
         return loadFragment(fragment);
