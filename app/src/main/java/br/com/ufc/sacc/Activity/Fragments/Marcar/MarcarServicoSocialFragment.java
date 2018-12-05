@@ -85,7 +85,7 @@ public class MarcarServicoSocialFragment extends Fragment {
     private void inicializarComponentes(View view){
         context = view.getContext();
         listViewConsulta = view.findViewById(R.id.listViewConsultaSocial);
-        listViewConsulta.setSelector(android.R.color.holo_green_light);
+        listViewConsulta.setSelector(android.R.color.holo_purple);
         edtMotivo = view.findViewById(R.id.motivo);
         btnConfirmarConsultaSocial = view.findViewById(R.id.btnConfirmarConsultaSocial);
     }

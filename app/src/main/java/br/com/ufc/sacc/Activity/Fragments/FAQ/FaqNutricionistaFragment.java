@@ -19,27 +19,23 @@ import java.util.ArrayList;
 
 public class FaqNutricionistaFragment extends Fragment {
 
-    int selected;
-    ArrayList<ItemFaq> listaItens;
+    private int selected;
+    private ArrayList<ItemFaq> listaItens;
 
-    ExpandableListAdapter adapter;
-    ExpandableListView expandableListViewItens;
-    FirebaseDatabase fireBaseDatabase;
-    DatabaseReference databaseReference;
+    private ExpandableListAdapter adapter;
+    private ExpandableListView expandableListViewItens;
+    private FirebaseDatabase fireBaseDatabase;
+    private DatabaseReference databaseReference;
 
-    Context context;
+    private Context context;
+    private View view;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_nutricionista, null);
+        view = inflater.inflate(R.layout.fragment_nutricionista, null);
 
-        context = view.getContext();
-
-        expandableListViewItens = view.findViewById(R.id.listViewNutricionista);
-        expandableListViewItens.setSelector( android.R.color.holo_green_light);
-
-        inicializarComponentes();
+        inicializarComponentes(view);
         iniciarFirebase();
         dispararAtualizacao();
 
@@ -54,10 +50,13 @@ public class FaqNutricionistaFragment extends Fragment {
         return view;
     }
 
-    private void inicializarComponentes() {
+    private void inicializarComponentes(View view) {
+        context = view.getContext();
         selected = -1;
 
-        listaItens = new ArrayList<ItemFaq>();
+        expandableListViewItens = view.findViewById(R.id.listViewNutricionista);
+        expandableListViewItens.setSelector( android.R.color.holo_purple);
+        listaItens = new ArrayList<>();
     }
 
     private void dispararAtualizacao() {
@@ -74,9 +73,6 @@ public class FaqNutricionistaFragment extends Fragment {
                 adapter = new ExpandableListAdapter(context, listaItens);
                 expandableListViewItens.setAdapter(adapter);
 
-//                getActivity()
-//                getContext();
-//                parent.getContext()
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {}

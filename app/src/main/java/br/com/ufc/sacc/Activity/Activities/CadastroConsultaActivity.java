@@ -24,8 +24,8 @@ public class CadastroConsultaActivity extends AppCompatActivity {
     private Spinner spinnerFuncao;
     private Spinner spinnerDiaDaSemana;
 
-    final String[] spinerListFuncao = {"Assistente Social", "Psicologia", "Nutrição"};
-    final String[] spinerDiaDaSemana = {"Segunda", "Terça", "Quarta", "Quinta", "Sexta"};
+    private final String[] spinerListFuncao = {"Assistente Social", "Psicologia", "Nutrição"};
+    private final String[] spinerDiaDaSemana = {"Segunda", "Terça", "Quarta", "Quinta", "Sexta"};
 
     private FirebaseDatabase fireBaseDatabase;
     private DatabaseReference databaseReference;
@@ -33,7 +33,6 @@ public class CadastroConsultaActivity extends AppCompatActivity {
     private ArrayList<ItemConsulta> listaItens = new ArrayList<>();
     private ArrayAdapter<ItemConsulta> arrayAdapterItemConsulta;
 
-    private ItemConsulta itemSelecionado;
     private int posicao;
     private int posicaoDiaDaSemana;
 
@@ -51,22 +50,12 @@ public class CadastroConsultaActivity extends AppCompatActivity {
         iniciarFirebase();
         dispararAtualizacao();
 
-        listViewConsulta.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                itemSelecionado = (ItemConsulta) parent.getItemAtPosition(position);
-
-                selected = position;
-            }
-        });
 
         spinnerFuncao.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 posicao = spinnerFuncao.getSelectedItemPosition();
-
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -76,9 +65,7 @@ public class CadastroConsultaActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 posicaoDiaDaSemana = spinnerDiaDaSemana.getSelectedItemPosition();
-
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -94,7 +81,7 @@ public class CadastroConsultaActivity extends AppCompatActivity {
         cd_tarde = findViewById(R.id.cd_tarde);
 
         listViewConsulta = findViewById(R.id.listViewConsulta);
-        listViewConsulta.setSelector(android.R.color.holo_green_light);
+        listViewConsulta.setSelector(android.R.color.holo_purple);
 
         spinnerFuncao = findViewById(R.id.edtFuncao);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(CadastroConsultaActivity.this,
@@ -144,48 +131,55 @@ public class CadastroConsultaActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         ItemConsulta itemConsulta;
-        String diaDaSemana, horario, tipo;
+        String diaDaSemana = spinerDiaDaSemana[posicaoDiaDaSemana];
+        String tipo = spinerListFuncao[posicao];
+        String horario;
         String uid;
 
         switch (item.getItemId()) {
             case R.id.addConsulta:
-
-                diaDaSemana = spinerDiaDaSemana[posicaoDiaDaSemana];
-                tipo = spinerListFuncao[posicao];
-
                 if (ab_manha.isChecked()) {
-                    uid = UUID.randomUUID().toString();
-                    horario = ab_manha.getText().toString();
+                    uid = geraUID();
+                    horario = geraHorario(ab_manha);
                     itemConsulta = new ItemConsulta(uid, diaDaSemana, horario, tipo);
                     listaItens.add(itemConsulta);
                 }
                 if (cd_manha.isChecked()) {
-                    uid = UUID.randomUUID().toString();
-                    horario = cd_manha.getText().toString();
+                    uid = geraUID();
+                    horario = geraHorario(cd_manha);
                     itemConsulta = new ItemConsulta(uid, diaDaSemana, horario, tipo);
                     listaItens.add(itemConsulta);
                 }
                 if (ab_tarde.isChecked()) {
-                    uid = UUID.randomUUID().toString();
-                    horario = ab_tarde.getText().toString();
+                    uid = geraUID();
+                    horario = geraHorario(ab_tarde);
                     itemConsulta = new ItemConsulta(uid, diaDaSemana, horario, tipo);
                     listaItens.add(itemConsulta);
                 }
                 if (cd_tarde.isChecked()) {
-                    uid = UUID.randomUUID().toString();
-                    horario = cd_tarde.getText().toString();
+                    uid = geraUID();
+                    horario = geraHorario(cd_tarde);
                     itemConsulta = new ItemConsulta(uid, diaDaSemana, horario, tipo);
                     listaItens.add(itemConsulta);
                 }
+
+
                 for (int i = 0, tam = listaItens.size(); i < tam; i++) {
                     databaseReference.child("ItemConsulta").child(listaItens.get(i).getUid()).setValue(listaItens.get(i));
                 }
-                alert("Item adicionado.");
+                alert("Horário de disponibilidade adicionado");
                 break;
         }
         return true;
     }
 
+    private String geraHorario(CheckBox hora) {
+        return hora.getText().toString();
+    }
+
+    private String geraUID() {
+        return UUID.randomUUID().toString();
+    }
 
     public void alert(String mensagem) {
         Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();

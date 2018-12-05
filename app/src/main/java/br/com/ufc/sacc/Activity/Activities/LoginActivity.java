@@ -35,8 +35,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private EditText edtEmail;
     private EditText edtSenha;
     private Button btnLogar;
-    private TextView tvAbreCadastro;
     private LoginButton btnLogarFacebook;
+    private TextView tvAbreCadastro;
     private CallbackManager callbackManager;
     private SignInButton btnLogarGoogle;
 
@@ -56,13 +56,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         btnLogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(validarCampos(edtEmail.getText().toString(), edtSenha.getText().toString())){
-
-                    usuario = new Usuario();
-                    usuario.setEmail(edtEmail.getText().toString());
-                    usuario.setSenha(edtSenha.getText().toString());
-                    validarLogin();
-                }
+            if(validarCampos(edtEmail.getText().toString(), edtSenha.getText().toString())){
+                usuario = new Usuario();
+                usuario.setEmail(edtEmail.getText().toString());
+                usuario.setSenha(edtSenha.getText().toString());
+                validarLogin();
+            }
             }
         });
 
@@ -186,17 +185,17 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private void firebaseLoginGoogle(GoogleSignInAccount acount) {
         AuthCredential credencialGoogle = GoogleAuthProvider.getCredential(acount.getIdToken(), null);
         autenticacao.signInWithCredential(credencialGoogle)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Intent intent = new Intent(LoginActivity.this, PerfilActivity.class);
-                            startActivity(intent);
-                        }else{
-                            alert("Falha na autenticação com Google");
-                        }
-                    }
-                });
+            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    Intent intent = new Intent(LoginActivity.this, PerfilActivity.class);
+                    startActivity(intent);
+                }else{
+                    alert("Falha na autenticação com Google");
+                }
+                }
+            });
     }
 
     private void validarLogin(){
@@ -205,10 +204,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         autenticacao.signInWithEmailAndPassword(usuario.getEmail(), usuario.getSenha()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    alert("Login efetuado. Bem vindo ao SACCS");
-                    abrirTelaPrincipal();
-                }
+            if(task.isSuccessful()){
+                alert("Login efetuado. Bem vindo ao SACCS");
+                abrirTelaPrincipal();
+            }
             }
         });
     }

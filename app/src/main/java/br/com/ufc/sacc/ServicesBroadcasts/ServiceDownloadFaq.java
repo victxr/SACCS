@@ -129,12 +129,4 @@ public class ServiceDownloadFaq extends Service {
         databaseReference = ConfiguracaoFirebase.getFirebase();
     }
 
-//    private void inicializarComponentes() {
-//        selected = -1;
-//
-//        expandableListViewItens = view.findViewById(R.id.listViewPsicologa);
-//        expandableListViewItens.setSelector( android.R.color.holo_green_light);
-//
-//        listaItens = new ArrayList<ItemFaq>();
-//    }
 }

@@ -64,7 +64,6 @@ public class SearchFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent_marcar = new Intent (getActivity(), MarcarConsultaActivity.class);
                 startActivity(intent_marcar);
-
             }
         });
         return view;
@@ -74,7 +73,7 @@ public class SearchFragment extends Fragment {
     private void inicializarComponentes(View view){
         context = view.getContext();
         listViewConsultaMarcada = view.findViewById(R.id.listViewConsultaMarcada);
-        listViewConsultaMarcada.setSelector(android.R.color.holo_green_light);
+        listViewConsultaMarcada.setSelector(android.R.color.holo_purple);
     }
 
     private void dispararAtualizacao() {
@@ -92,8 +91,7 @@ public class SearchFragment extends Fragment {
                         }
                     }
                 }
-
-                arrayAdapterItemConsultaMarcada = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, listaMinhasConsultas);
+                arrayAdapterItemConsultaMarcada = new ArrayAdapter<>(context, android.R.layout.simple_list_item_1, listaMinhasConsultas);
                 listViewConsultaMarcada.setAdapter(arrayAdapterItemConsultaMarcada);
             }
 
@@ -133,5 +131,4 @@ public class SearchFragment extends Fragment {
             }
         });
     }
-
 }

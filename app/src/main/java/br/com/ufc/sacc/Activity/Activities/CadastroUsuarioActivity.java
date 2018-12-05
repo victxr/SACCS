@@ -68,7 +68,6 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
         });
     }
 
-
     private void cadastrarUsuario() {
         autenticacao = ConfiguracaoFirebase.getAutenticacaoFirebase();
         autenticacao.createUserWithEmailAndPassword(usuario.getEmail(),usuario.getSenha()
@@ -90,7 +89,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                     abrirLoginUsuario();
 
                 } else {
-                    String erroExcecao = "";
+                    String erroExcecao;
 
                     try {
                         throw task.getException();

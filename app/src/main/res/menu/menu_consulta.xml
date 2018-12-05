@@ -6,15 +6,4 @@
           android:title="Adicionar"
           app:showAsAction="ifRoom"/>
 
-    <item android:id="@+id/editConsulta"
-          android:icon="@drawable/ic_action_edit"
-          android:title="Editar"
-          app:showAsAction="ifRoom"/>
-
-    <item android:id="@+id/delConsulta"
-          android:icon="@drawable/ic_action_delete"
-          android:title="Deletar"
-          app:showAsAction="ifRoom"/>
-
-
 </menu>

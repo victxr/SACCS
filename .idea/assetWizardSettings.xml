@@ -18,12 +18,12 @@
                                 <PersistentState>
                                   <option name="children">
                                     <map>
-                                      <entry key="foregroundClipartAsset">
+                                      <entry key="foregroundImage">
                                         <value>
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/C:/Program%20Files/JetBrains/IntelliJ%20IDEA%202018.2.5/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_delete_black_24dp.xml" />
+                                                <entry key="scalingPercent" value="84" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -33,11 +33,8 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="backgroundLayerName" value="ic_launcher_background" />
-                                      <entry key="foregroundAssetType" value="CLIP_ART" />
-                                      <entry key="foregroundImage" value="C:\Users\Jonas Lopes\Desktop\usuario.png" />
-                                      <entry key="foregroundLayerName" value="ic_delete" />
-                                      <entry key="outputName" value="ic_action_delete" />
+                                      <entry key="foregroundImage" value="C:\Users\Jonas Lopes\Desktop\sacss.png" />
+                                      <entry key="foregroundLayerName" value="ic_saccs" />
                                     </map>
                                   </option>
                                 </PersistentState>

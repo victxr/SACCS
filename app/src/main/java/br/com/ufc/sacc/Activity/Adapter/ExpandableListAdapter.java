@@ -10,16 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import br.com.ufc.sacc.Model.ItemFaq;
 import br.com.ufc.sacc.R;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
-    ValueEventListener valueEventListener;
-    Context context;
-    List<ItemFaq> itensDeFaq;
+    private Context context;
+    private List<ItemFaq> itensDeFaq;
 
     public ExpandableListAdapter(Context context, List<ItemFaq> itensDeFaq) {
         this.context = context;

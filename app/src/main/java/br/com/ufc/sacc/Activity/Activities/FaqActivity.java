@@ -15,18 +15,22 @@ import br.com.ufc.sacc.ServicesBroadcasts.ServiceDownloadFaq;
 
 public class FaqActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    BottomNavigationView bottomNavigationView;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_faq);
 
+        inicializarComponentes();
+
+        loadFragment(new FaqPsicologaFragment());
+    }
+
+    private void inicializarComponentes() {
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.item_psicologa);
-
-        loadFragment(new FaqPsicologaFragment());
     }
 
     @Override
@@ -36,8 +40,8 @@ public class FaqActivity extends AppCompatActivity implements BottomNavigationVi
         switch(menuItem.getItemId()){
             case R.id.item_psicologa:
                 fragment = new FaqPsicologaFragment();
-                Intent intent = new Intent(FaqActivity.this, ServiceDownloadFaq.class);
-                startService(intent);
+//                Intent intent = new Intent(FaqActivity.this, ServiceDownloadFaq.class);
+//                startService(intent);
                 break;
 
             case R.id.item_nutricionista:
@@ -58,4 +62,6 @@ public class FaqActivity extends AppCompatActivity implements BottomNavigationVi
         }
         return false;
     }
+
+
 }

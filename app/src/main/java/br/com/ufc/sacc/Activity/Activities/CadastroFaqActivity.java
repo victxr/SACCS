@@ -19,20 +19,20 @@ import java.util.UUID;
 
 public class CadastroFaqActivity extends AppCompatActivity {
 
-    int selected;
-    EditText edtPergunta, edtResposta;
-    ListView listView;
-    Spinner spinner;
-    final String[] spinerListFuncao = {"Assistente Social", "Psicologia", "Nutrição"};
+    private int selected;
+    private int posicao;
+    private EditText edtPergunta, edtResposta;
+    private ListView listView;
+    private Spinner spinner;
+    private final String[] spinerListFuncao = {"Assistente Social", "Psicologia", "Nutrição"};
 
-    FirebaseDatabase fireBaseDatabase;
-    DatabaseReference databaseReference;
+    private FirebaseDatabase fireBaseDatabase;
+    private DatabaseReference databaseReference;
 
-    private ArrayList<ItemFaq> listaItens = new ArrayList<>();
+    private ArrayList<ItemFaq> listaItensFaq = new ArrayList<>();
     private ArrayAdapter<ItemFaq> arrayAdapterItemFaq;
 
-    ItemFaq itemSelecionado;
-    int posicao;
+    private ItemFaq itemSelecionado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +73,7 @@ public class CadastroFaqActivity extends AppCompatActivity {
         edtResposta = findViewById(R.id.edtResposta);
 
         listView = findViewById(R.id.listView);
-        listView.setSelector(android.R.color.holo_green_light);
+        listView.setSelector(android.R.color.holo_purple);
 
         spinner = findViewById(R.id.edtFuncao);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(CadastroFaqActivity.this, android.R.layout.simple_dropdown_item_1line, spinerListFuncao);
@@ -91,13 +91,13 @@ public class CadastroFaqActivity extends AppCompatActivity {
         databaseReference.child("ItemFaq").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                listaItens.clear();
+                listaItensFaq.clear();
                 for(DataSnapshot objSnap: dataSnapshot.getChildren()){
                     ItemFaq itemFaq = objSnap.getValue(ItemFaq.class);
 
-                    listaItens.add(itemFaq);
+                    listaItensFaq.add(itemFaq);
                 }
-                arrayAdapterItemFaq = new ArrayAdapter<ItemFaq>(CadastroFaqActivity.this, android.R.layout.simple_list_item_1, listaItens);
+                arrayAdapterItemFaq = new ArrayAdapter<>(CadastroFaqActivity.this, android.R.layout.simple_list_item_1, listaItensFaq);
                 listView.setAdapter(arrayAdapterItemFaq);
             }
 
@@ -117,21 +117,19 @@ public class CadastroFaqActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         ItemFaq itemFaq;
-        String pergunta, resposta, tipo;
+        String pergunta = edtPergunta.getText().toString();;
+        String resposta = edtResposta.getText().toString();;
+        String tipo = spinerListFuncao[posicao];
         String uid;
 
         switch (item.getItemId()) {
             case R.id.addFaq:
                 uid = UUID.randomUUID().toString();
-                pergunta = edtPergunta.getText().toString();
-                resposta = edtResposta.getText().toString();
-                tipo = spinerListFuncao[posicao];
-
                 itemFaq = new ItemFaq(uid, pergunta, resposta, tipo);
 
                 if(validaItemFaq(itemFaq)){
                     databaseReference.child("ItemFaq").child(itemFaq.getUid()).setValue(itemFaq);
-                    alert("Item adicionado.");
+                    alert("Item de FAQ adicionado.");
 
                     limparCamposTexto();
                 }else{
@@ -141,15 +139,12 @@ public class CadastroFaqActivity extends AppCompatActivity {
 
             case R.id.editFaq:
                 uid = itemSelecionado.getUid();
-                pergunta = edtPergunta.getText().toString();
-                resposta = edtResposta.getText().toString();
-                tipo = spinerListFuncao[posicao];
 
                 itemFaq = new ItemFaq(uid, pergunta, resposta, tipo);
 
                 if(validaItemFaq(itemFaq)){
                     databaseReference.child("ItemFaq").child(itemFaq.getUid()).setValue(itemFaq);
-                    alert("Item editado.");
+                    alert("Item de FAQ editado.");
 
                     limparCamposTexto();
                 }else{
@@ -159,10 +154,9 @@ public class CadastroFaqActivity extends AppCompatActivity {
                 break;
 
             case R.id.delFaq:
-                itemFaq = new ItemFaq();
-                itemFaq.setUid(itemSelecionado.getUid());
+                String remover =  itemSelecionado.getUid();
                 alert("Item removido!");
-                databaseReference.child("ItemFaq").child(itemFaq.getUid()).removeValue();
+                databaseReference.child("ItemFaq").child(remover).removeValue();
                 break;
         }
         return true;
@@ -176,7 +170,6 @@ public class CadastroFaqActivity extends AppCompatActivity {
             return true;
         }
     }
-
 
     private void limparCamposTexto() {
         edtPergunta.setText("");

@@ -85,7 +85,7 @@ public class MarcarNutricionistaFragment extends Fragment {
     private void inicializarComponentes(View view){
         context = view.getContext();
         listViewConsulta = view.findViewById(R.id.listViewConsultaNutricionista);
-        listViewConsulta.setSelector(android.R.color.holo_green_light);
+        listViewConsulta.setSelector(android.R.color.holo_purple);
         edtMotivo = view.findViewById(R.id.motivo);
         btnConfirmarConsultaNutricionista = view.findViewById(R.id.btnConfirmarConsultaNutricionista);
     }
@@ -116,7 +116,6 @@ public class MarcarNutricionistaFragment extends Fragment {
                         Log.d("Email do cara do banco:", usuario.getEmail());
                     }
                 }
-
             }
 
             @Override

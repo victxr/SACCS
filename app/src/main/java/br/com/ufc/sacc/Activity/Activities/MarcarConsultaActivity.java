@@ -13,19 +13,22 @@ import br.com.ufc.sacc.R;
 
 public class MarcarConsultaActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
 
-
-    BottomNavigationView bottomNavigationView;
+    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_marcar);
 
+        inicializarComponentes();
+
+        loadFragment(new MarcarPsicologaFragment());
+    }
+
+    private void inicializarComponentes() {
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.item_psicologa);
-
-        loadFragment(new MarcarPsicologaFragment());
     }
 
     @Override

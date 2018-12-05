@@ -19,17 +19,16 @@ import java.util.ArrayList;
 
 public class FaqPsicologaFragment extends Fragment {
 
-     int selected;
-     ArrayList<ItemFaq> listaItens;
+    private int selected;
+    private ArrayList<ItemFaq> listaItens;
 
-     ExpandableListAdapter adapter;
-     ExpandableListView expandableListViewItens;
-     FirebaseDatabase fireBaseDatabase;
-     DatabaseReference databaseReference;
+    private ExpandableListAdapter adapter;
+    private ExpandableListView expandableListViewItens;
+    private FirebaseDatabase fireBaseDatabase;
+    private  DatabaseReference databaseReference;
 
-    Context context;
-
-    View view;
+    private Context context;
+    private View view;
 
     @Nullable
     @Override
@@ -38,7 +37,7 @@ public class FaqPsicologaFragment extends Fragment {
 
         context = view.getContext();
 
-        inicializarComponentes();
+        inicializarComponentes(view);
         iniciarFirebase();
         dispararAtualizacao();
 
@@ -53,13 +52,14 @@ public class FaqPsicologaFragment extends Fragment {
         return view;
     }
 
-    private void inicializarComponentes() {
+    private void inicializarComponentes(View view) {
+        context = view.getContext();
         selected = -1;
 
         expandableListViewItens = view.findViewById(R.id.listViewPsicologa);
-        expandableListViewItens.setSelector( android.R.color.holo_green_light);
+        expandableListViewItens.setSelector( android.R.color.holo_purple);
 
-        listaItens = new ArrayList<ItemFaq>();
+        listaItens = new ArrayList<>();
     }
 
     private void dispararAtualizacao() {

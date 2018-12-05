@@ -43,7 +43,6 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         iniciarFirebase();
         pegarUsuarioLogado();
 
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawer = findViewById(R.id.drawer_layout);
@@ -75,9 +74,6 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
             case R.id.nav_home:
                 fragment = new HomeFragment();
                 break;
-//            case R.id.nav_profile:
-//                fragment = new ProfileFragment();
-//                break;
             case R.id.nav_search:
                 fragment = new SearchFragment();
                 break;
