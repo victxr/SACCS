@@ -25,7 +25,7 @@ import com.google.firebase.database.*;
 
 import java.util.ArrayList;
 
-public class SearchFragment extends Fragment {
+public class ConsultaFragment extends Fragment {
 
     private FirebaseDatabase fireBaseDatabase;
     private DatabaseReference databaseReference;
@@ -101,7 +101,7 @@ public class SearchFragment extends Fragment {
         });
     }
     private void iniciarFirebase() {
-        FirebaseApp.initializeApp(SearchFragment.this.getContext());
+        FirebaseApp.initializeApp(ConsultaFragment.this.getContext());
         fireBaseDatabase = ConfiguracaoFirebase.getFirebaseDatabase();
         databaseReference = ConfiguracaoFirebase.getFirebase();
     }
