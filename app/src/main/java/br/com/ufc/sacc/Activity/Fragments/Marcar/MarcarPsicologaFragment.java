@@ -24,15 +24,15 @@ import java.util.UUID;
 
 public class MarcarPsicologaFragment extends Fragment {
 
-    FirebaseDatabase fireBaseDatabase;
-    DatabaseReference databaseReference;
-    ListView listViewConsulta;
-    Context context;
-    EditText edtMotivo;
-    Button btnConfirmarConsultaPsicologa;
-    ItemConsulta itemSelecionado;
-    ItemConsultaMarcada itemConsultaMarcada;
-    int selected;
+    private FirebaseDatabase fireBaseDatabase;
+    private DatabaseReference databaseReference;
+    private ListView listViewConsulta;
+    private Context context;
+    private EditText edtMotivo;
+    private  Button btnConfirmarConsultaPsicologa;
+    private  ItemConsulta itemSelecionado;
+    private ItemConsultaMarcada itemConsultaMarcada;
+    private int selected;
 
     private FirebaseAuth autenticacao;
 

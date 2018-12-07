@@ -24,15 +24,15 @@ import java.util.UUID;
 
 public class MarcarServicoSocialFragment extends Fragment {
 
-    FirebaseDatabase fireBaseDatabase;
-    DatabaseReference databaseReference;
-    ListView listViewConsulta;
-    Context context;
-    EditText edtMotivo;
-    Button btnConfirmarConsultaSocial;
-    ItemConsulta itemSelecionado;
-    ItemConsultaMarcada itemConsultaMarcada;
-    int selected;
+    private  FirebaseDatabase fireBaseDatabase;
+    private  DatabaseReference databaseReference;
+    private ListView listViewConsulta;
+    private Context context;
+    private EditText edtMotivo;
+    private Button btnConfirmarConsultaSocial;
+    private ItemConsulta itemSelecionado;
+    private ItemConsultaMarcada itemConsultaMarcada;
+    private int selected;
 
     private FirebaseAuth autenticacao;
 
