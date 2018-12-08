@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 import br.com.ufc.sacc.Activity.Adapter.ExpandableListAdapter;
 import br.com.ufc.sacc.DAO.ConfiguracaoFirebase;
 import br.com.ufc.sacc.Model.ItemFaq;

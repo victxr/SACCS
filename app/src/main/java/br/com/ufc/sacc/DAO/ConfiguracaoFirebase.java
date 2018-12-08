@@ -10,6 +10,8 @@ public class ConfiguracaoFirebase {
     private static DatabaseReference referenciaFirebase;
     private static FirebaseAuth autenticacao;
     private static FirebaseDatabase firebaseDatabase;
+
+//    private static int qtdItensConsulta;
 //    private static Usuario usuarioLogado = new Usuario();
 //    private static String emailAlunoLogado;
 
@@ -34,6 +36,29 @@ public class ConfiguracaoFirebase {
         }
         return firebaseDatabase;
     }
+
+//    public static int getQtdConsultas(){
+//        firebaseDatabase = getFirebaseDatabase();
+//        referenciaFirebase = getFirebase();
+//
+//        referenciaFirebase.child("ItemConsultaMarcada").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                for (DataSnapshot objSnap : dataSnapshot.getChildren()) {
+//                    if(objSnap.getValue() != null) {
+//                        qtdItensConsulta++;
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//            }
+//        });
+//
+//        return qtdItensConsulta;
+//    }
+
 
 //    public static Usuario getUsuarioLogado() {
 //        firebaseDatabase = ConfiguracaoFirebase.getFirebaseDatabase();
