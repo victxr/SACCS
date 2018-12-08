@@ -58,14 +58,18 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
-        listaConsultas = new ArrayList<>();
+        inicializarComponentes();
 
         iniciarFirebase();
         pegarUsuarioLogado();
         pegarConsultasMarcadas();
+        atualizaQtdConsulta();
 
-        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-        qtdConsultasMarcadas = prefs.getInt(QTD_CONSULTA, 0);
+        loadFragment(new HomeFragment());
+    }
+
+    private void inicializarComponentes() {
+        listaConsultas = new ArrayList<>();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -76,7 +80,6 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
 
         View header = navigationView.getHeaderView(0);
         nomeUser = header.findViewById(R.id.nomeUser);
-
         emailUser = header.findViewById(R.id.emailUser);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
@@ -84,8 +87,6 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
 
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-        loadFragment(new HomeFragment());
     }
 
     @Override
@@ -227,18 +228,8 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
     @Override
     protected void onResume() {
         super.onResume();
-
         observer();
     }
-
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//
-//        SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
-//        editor.putInt(QTD_CONSULTA, listaConsultas.size());
-//        editor.apply();
-//    }
 
     protected void sharedPreference() {
         SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
@@ -256,7 +247,6 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
 
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
                     Intent intent = new Intent(PrincipalActivity.this, SobreActivity.class);
 
                     NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
