@@ -91,25 +91,11 @@
                   <entry key="vectorAssetStep">
                     <value>
                       <PersistentState>
-                        <option name="children">
-                          <map>
-                            <entry key="clipartAsset">
-                              <value>
-                                <PersistentState>
-                                  <option name="values">
-                                    <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/JetBrains/IntelliJ%20IDEA%20Community%20Edition%202018.2.6/plugins/android/lib/android.jar!/images/material_design_icons/image/ic_add_to_photos_black_24dp.xml" />
-                                    </map>
-                                  </option>
-                                </PersistentState>
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_add_consulta" />
-                            <entry key="sourceFile" value="C:\Users\Ester Silva" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_minha_consulta" />
+                            <entry key="sourceFile" value="C:\Users\Jonas Lopes\Desktop\baseline-query_builder-24px.svg" />
                           </map>
                         </option>
                       </PersistentState>

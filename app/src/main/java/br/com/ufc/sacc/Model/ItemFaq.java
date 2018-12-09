@@ -2,8 +2,8 @@ package br.com.ufc.sacc.Model;
 
 
 public class ItemFaq {
-    private static int contadorId = 0;
 
+    private static int contadorId = 0;
     private int id;
 
     private String uid;

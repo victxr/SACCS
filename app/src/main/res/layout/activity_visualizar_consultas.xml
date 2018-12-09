@@ -10,7 +10,7 @@
             android:layout_centerHorizontal="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Psicóloga"
+            android:text="SERVIDOR"
             android:gravity="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
 
@@ -19,12 +19,13 @@
             android:layout_centerHorizontal="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Duvidas frequentes"/>
+            android:layout_marginTop="16dp"
+            android:text="Consultas desta semana:"/>
 
     <ExpandableListView
-            android:id="@+id/listViewPsicologa"
+            android:id="@+id/listViewVisualizarConsultas"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp">
     </ExpandableListView>
 

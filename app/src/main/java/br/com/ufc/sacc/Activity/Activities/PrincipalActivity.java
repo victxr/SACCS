@@ -89,88 +89,6 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         toggle.syncState();
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Fragment fragment = null;
-
-        switch (item.getItemId()) {
-            case R.id.nav_home:
-                fragment = new HomeFragment();
-                break;
-            case R.id.nav_search:
-                fragment = new ConsultaFragment();
-                break;
-            case R.id.nav_message:
-                fragment = new MessageFragment();
-                break;
-            case R.id.nav_help:
-                Intent intent_faq = new Intent(getApplicationContext(), FaqActivity.class);
-                startActivity(intent_faq);
-                break;
-            case R.id.nav_cad_consulta:
-                Intent intent_cad_consulta = new Intent(getApplicationContext(), CadastroConsultaActivity.class);
-                startActivity(intent_cad_consulta);
-                break;
-            case R.id.cad_faq:
-                Intent intent_cad_faq = new Intent(getApplicationContext(), CadastroFaqActivity.class);
-                startActivity(intent_cad_faq);
-                break;
-            case R.id.nav_location:
-                fragment = new LocationFragment();
-                break;
-        }
-        drawer.closeDrawer(GravityCompat.START);
-        return loadFragment(fragment);
-    }
-
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.options_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.about:
-                abrirTelaSobre();
-                break;
-            case R.id.sair:
-                deslogar();
-                break;
-        }
-        return true;
-    }
-
-    private void deslogar() {
-        Toast.makeText(this, "Você deslogou!", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(PrincipalActivity.this, LoginActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    private void abrirTelaSobre() {
-        Intent intent = new Intent(PrincipalActivity.this, SobreActivity.class);
-        startActivity(intent);
-    }
-
-    private boolean loadFragment(Fragment fragment) {
-        if (fragment != null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            this.moveTaskToBack(true);
-        }
-    }
-
     private void iniciarFirebase() {
         FirebaseApp.initializeApp(PrincipalActivity.this);
         fireBaseDatabase = ConfiguracaoFirebase.getFirebaseDatabase();
@@ -194,7 +112,6 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
                     }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
@@ -218,11 +135,103 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
                     }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         });
+    }
+
+    private void atualizaQtdConsulta() {
+        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+        qtdConsultasMarcadas = prefs.getInt(QTD_CONSULTA, 0);
+    }
+
+    private boolean loadFragment(Fragment fragment) {
+        if (fragment != null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.about:
+                abrirTelaSobre();
+                break;
+            case R.id.sair:
+                deslogar();
+                break;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Fragment fragment = null;
+
+        switch (item.getItemId()) {
+            case R.id.nav_home:
+                fragment = new HomeFragment();
+                break;
+            case R.id.nav_consulta:
+                fragment = new ConsultaFragment();
+                break;
+            case R.id.nav_message:
+                fragment = new MessageFragment();
+                break;
+            case R.id.nav_help:
+                Intent intent_faq = new Intent(getApplicationContext(), FaqActivity.class);
+                startActivity(intent_faq);
+                break;
+            case R.id.nav_location:
+                fragment = new LocationFragment();
+                break;
+            case R.id.nav_minha_consulta:
+                Intent intent_minha_consulta = new Intent(getApplicationContext(), VisualizarConsultasActivity.class);
+                startActivity(intent_minha_consulta);
+                break;
+            case R.id.nav_cad_consulta:
+                Intent intent_cad_consulta = new Intent(getApplicationContext(), CadastroConsultaActivity.class);
+                startActivity(intent_cad_consulta);
+                break;
+            case R.id.cad_faq:
+                Intent intent_cad_faq = new Intent(getApplicationContext(), CadastroFaqActivity.class);
+                startActivity(intent_cad_faq);
+                break;
+
+
+        }
+        drawer.closeDrawer(GravityCompat.START);
+        return loadFragment(fragment);
+    }
+
+    private void abrirTelaSobre() {
+        Intent intent = new Intent(PrincipalActivity.this, SobreActivity.class);
+        startActivity(intent);
+    }
+
+    private void deslogar() {
+        Toast.makeText(this, "Você deslogou!", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(PrincipalActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            this.moveTaskToBack(true);
+        }
     }
 
     @Override
@@ -294,11 +303,6 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         }
         sharedPreference();
         atualizaQtdConsulta();
-    }
-
-    private void atualizaQtdConsulta() {
-        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-        qtdConsultasMarcadas = prefs.getInt(QTD_CONSULTA, 0);
     }
 
 }

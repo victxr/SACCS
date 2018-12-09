@@ -1,6 +1,8 @@
 package br.com.ufc.sacc.Model;
 
 public class ItemConsultaMarcada {
+    private static int contadorId = 0;
+    private int id;
 
     private String uid;
     private String data;
@@ -14,6 +16,8 @@ public class ItemConsultaMarcada {
     public ItemConsultaMarcada(){}
 
     public ItemConsultaMarcada(String uid, String data, String tipo, String motivo, String nomeAluno, String matriculaAluno) {
+        this.id = contadorId++;
+
         this.uid = uid;
         this.data = data;
         this.tipo = tipo;
@@ -69,6 +73,14 @@ public class ItemConsultaMarcada {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

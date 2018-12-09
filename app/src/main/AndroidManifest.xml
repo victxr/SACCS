@@ -54,17 +54,21 @@
                 <data android:scheme="@string/fb_login_protocol_scheme"/>
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.Activities.PerfilActivity"
-                  android:label="Perfil">
+        <activity
+                android:name=".Activity.Activities.PerfilActivity"
+                android:label="Perfil">
         </activity>
-        <activity android:name=".Activity.Activities.FaqActivity"
-                  android:label="Perguntas Frequentes">
+        <activity
+                android:name=".Activity.Activities.FaqActivity"
+                android:label="Perguntas Frequentes">
         </activity>
-        <activity android:name=".Activity.Activities.SobreActivity"
-                  android:label="Sobre">
+        <activity
+                android:name=".Activity.Activities.SobreActivity"
+                android:label="Sobre">
         </activity>
-        <activity android:name=".Activity.Activities.MarcarConsultaActivity"
-                  android:label="Marcar Consulta">
+        <activity
+                android:name=".Activity.Activities.MarcarConsultaActivity"
+                android:label="Marcar Consulta">
         </activity>
         <activity android:name=".Activity.Activities.CadastroFaqActivity">
         </activity>
@@ -72,12 +76,15 @@
         </activity>
 
         <service
-            android:name=".ServicesBroadcasts.ServiceDownloadFaq"
-            android:exported="false">
+                android:name=".ServicesBroadcasts.ServiceDownloadFaq"
+                android:exported="false">
             <intent-filter>
                 <action android:name="SERVICO_DOWNLOAD_FAQ"/>
             </intent-filter>
         </service>
+
+        <activity android:name=".Activity.Activities.VisualizarConsultasActivity">
+        </activity>
     </application>
 
 </manifest>
