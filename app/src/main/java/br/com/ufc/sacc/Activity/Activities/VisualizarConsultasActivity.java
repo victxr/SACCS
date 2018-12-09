@@ -67,16 +67,37 @@ public class VisualizarConsultasActivity extends AppCompatActivity {
                 for(DataSnapshot objSnap: dataSnapshot.getChildren()){
                     ItemConsultaMarcada itemMarcada = objSnap.getValue(ItemConsultaMarcada.class);
 
-//                  if(itemFaq.getTipo().equals("Psicologia")) listaItens.add(ItemConsultaMarcada);
                     listaItens.add(itemMarcada);
                 }
+
+                listaItens = ordenarPorTipo(listaItens);
                 adapter = new ExpandableListAdapterVisualizarConsulta(VisualizarConsultasActivity.this, listaItens);
                 expandableListViewItens.setAdapter(adapter);
-
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
+    }
+
+    private ArrayList<ItemConsultaMarcada> ordenarPorTipo(ArrayList<ItemConsultaMarcada> lista) {
+        ArrayList<ItemConsultaMarcada> listaRetorno = new ArrayList<>();
+
+        for(int i = 0, tam = lista.size(); i < tam; i++){
+            if(lista.get(i).getTipo().equals("Nutricionista")){
+                listaRetorno.add(lista.get(i));
+            }
+        }
+        for(int i = 0, tam = lista.size(); i < tam; i++){
+            if(lista.get(i).getTipo().equals("Psicóloga")){
+                listaRetorno.add(lista.get(i));
+            }
+        }
+        for(int i = 0, tam = lista.size(); i < tam; i++){
+            if(lista.get(i).getTipo().equals("Serviço Social")){
+                listaRetorno.add(lista.get(i));
+            }
+        }
+        return listaRetorno;
     }
 
 }

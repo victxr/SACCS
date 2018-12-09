@@ -42,7 +42,7 @@ public class ExpandableListAdapterVisualizarConsulta extends BaseExpandableListA
 
         TextView txViewNomeItem = convertView.findViewById( R.id.listHeaderVisualizarConsulta );
         txViewNomeItem.setTypeface(null, Typeface.BOLD);
-        txViewNomeItem.setText( item.getNomeAluno() + " - " + item.getData());
+        txViewNomeItem.setText( item.getTipo() + " - " + item.getData());
 
         return convertView;
     }
@@ -57,9 +57,9 @@ public class ExpandableListAdapterVisualizarConsulta extends BaseExpandableListA
         }
 
         TextView txViewContentResposta = convertView.findViewById(R.id.txtRespostaVisualizarConsulta);
-        txViewContentResposta.setText("Matrícula: " + itemConsultaMarcada.getMatriculaAluno() +
-                                     "\nMotivo: " + itemConsultaMarcada.getMotivo() +
-                                     "\nProfissional: " + itemConsultaMarcada.getTipo());
+        txViewContentResposta.setText("Nome: " + itemConsultaMarcada.getNomeAluno() +
+                                     "\nMatrícula: " + itemConsultaMarcada.getMatriculaAluno() +
+                                     "\nMotivo: " + itemConsultaMarcada.getMotivo());
         return convertView;
     }
 

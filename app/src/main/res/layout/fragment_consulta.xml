@@ -12,6 +12,7 @@
                 android:text="Tela de consulta"
                 android:textSize="30sp"
                 android:layout_centerHorizontal="true"
+                android:gravity="center"
                 android:layout_gravity="center"/>
 
         <ListView android:id="@+id/listViewConsultaMarcada"
