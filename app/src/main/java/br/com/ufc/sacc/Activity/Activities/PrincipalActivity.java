@@ -3,6 +3,7 @@ package br.com.ufc.sacc.Activity.Activities;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
@@ -32,6 +33,7 @@ import br.com.ufc.sacc.DAO.ConfiguracaoFirebase;
 import br.com.ufc.sacc.Model.ItemConsultaMarcada;
 import br.com.ufc.sacc.Model.Usuario;
 import br.com.ufc.sacc.R;
+import br.com.ufc.sacc.ServicesBroadcasts.ServiceNotificar;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
@@ -206,8 +208,6 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
                 Intent intent_cad_faq = new Intent(getApplicationContext(), CadastroFaqActivity.class);
                 startActivity(intent_cad_faq);
                 break;
-
-
         }
         drawer.closeDrawer(GravityCompat.START);
         return loadFragment(fragment);
@@ -247,59 +247,12 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
     }
 
     public void observer() {
-        Log.d("Lista de contatos", ""+listaConsultas.size());
+        Log.d("Lista de consultas", ""+listaConsultas.size());
         Log.d("Qtd Consultas", ""+qtdConsultasMarcadas);
 
         if (listaConsultas.size() > qtdConsultasMarcadas) {
-            databaseReference = FirebaseDatabase.getInstance().getReference("ItemFaq");
-            ChildEventListener childListener = new ChildEventListener() {
-
-                @Override
-                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                    Intent intent = new Intent(PrincipalActivity.this, SobreActivity.class);
-
-                    NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                    PendingIntent pendingIntent = PendingIntent.getActivity(PrincipalActivity.this, 0, intent, 0);
-
-                    NotificationCompat.Builder builderNotification = new NotificationCompat.Builder(PrincipalActivity.this);
-                    builderNotification.setTicker("SACSS");
-                    builderNotification.setContentTitle("NOVA CONSULTA MARCADA!");
-                    builderNotification.setContentText("Você tem uma nova consulta, clique aqui.");
-                    builderNotification.setSmallIcon(R.drawable.ic_notification);
-                    builderNotification.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.sacss));
-                    builderNotification.setContentIntent(pendingIntent);
-
-                    Notification notification = builderNotification.build();
-                    notification.vibrate = new long[]{150, 300, 150, 600};
-                    notification.flags = Notification.FLAG_AUTO_CANCEL;
-                    notificationManager.notify(R.drawable.ic_notification, notification);
-
-                    try {
-                        Uri som = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                        Ringtone toque = RingtoneManager.getRingtone(PrincipalActivity.this, som);
-                        toque.play();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                }
-
-                @Override
-                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-                }
-
-                @Override
-                public void onChildRemoved(DataSnapshot dataSnapshot) {
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                }
-            };
-            databaseReference.addChildEventListener(childListener);
+            Intent intentNotificar = new Intent(PrincipalActivity.this, ServiceNotificar.class);
+            startService(intentNotificar);
         }
         sharedPreference();
         atualizaQtdConsulta();

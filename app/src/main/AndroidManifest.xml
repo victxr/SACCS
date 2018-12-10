@@ -2,7 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="br.com.ufc.sacc">
 
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
             android:allowBackup="true"
@@ -74,17 +79,30 @@
         </activity>
         <activity android:name=".Activity.Activities.CadastroConsultaActivity">
         </activity>
+        <activity android:name=".Activity.Activities.VisualizarConsultasActivity">
+        </activity>
 
         <service
-                android:name=".ServicesBroadcasts.ServiceDownloadFaq"
+                android:name=".ServicesBroadcasts.ServiceNotificar"
                 android:exported="false">
             <intent-filter>
-                <action android:name="SERVICO_DOWNLOAD_FAQ"/>
+                <action android:name="SERVICO_NOTIFICA_CONSULTAS"/>
+            </intent-filter>
+        </service>
+        <service
+                android:name=".ServicesBroadcasts.ServiceVerificaWifi"
+                android:exported="false">
+            <intent-filter>
+                <action android:name="SERVICO_BROADCAST"/>
             </intent-filter>
         </service>
 
-        <activity android:name=".Activity.Activities.VisualizarConsultasActivity">
-        </activity>
+        <receiver android:name=".ServicesBroadcasts.BroadcastWifi">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

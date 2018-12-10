@@ -1,6 +1,9 @@
 package br.com.ufc.sacc.Activity.Activities;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +16,7 @@ import android.widget.Toast;
 import br.com.ufc.sacc.DAO.ConfiguracaoFirebase;
 import br.com.ufc.sacc.Model.Usuario;
 import br.com.ufc.sacc.R;
+import br.com.ufc.sacc.ServicesBroadcasts.ServiceVerificaWifi;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -49,19 +53,22 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        inicializarComponentes();
+        verificaWifi();
 
         alert("Digite os dados de login");
+
+        inicializarComponentes();
 
         btnLogar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            if(validarCampos(edtEmail.getText().toString(), edtSenha.getText().toString())){
-                usuario = new Usuario();
-                usuario.setEmail(edtEmail.getText().toString());
-                usuario.setSenha(edtSenha.getText().toString());
-                validarLogin();
-            }
+                verificaWifi();
+                if(validarCampos(edtEmail.getText().toString(), edtSenha.getText().toString())){
+                    usuario = new Usuario();
+                    usuario.setEmail(edtEmail.getText().toString());
+                    usuario.setSenha(edtSenha.getText().toString());
+                    validarLogin();
+                }
             }
         });
 
@@ -84,10 +91,16 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         clickButtonGoogle();
     }
 
+    private void verificaWifi() {
+        Intent intent = new Intent(LoginActivity.this, ServiceVerificaWifi.class);
+        startService(intent);
+    }
+
     private void clickButtonGoogle() {
         btnLogarGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                verificaWifi();
                 signIn();
             }
         });
@@ -240,7 +253,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     private void alert(String operação_cancelada) {
-        Toast.makeText(LoginActivity.this, operação_cancelada, Toast.LENGTH_LONG).show();
+        Toast.makeText(LoginActivity.this, operação_cancelada, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -253,5 +266,31 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         edtSenha = findViewById(R.id.edtSenha);
         btnLogar = findViewById(R.id.btnLogar);
         tvAbreCadastro = findViewById(R.id.tvAbreCadastro);
+    }
+
+    private BroadcastReceiver br = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            Bundle bundle = intent.getExtras();
+            if (bundle != null) {
+                Toast.makeText(context, "Por favor, ative seu wifi. O SACCS precisa de" +
+                                                " acesso a internet para funcionar completamente.", Toast.LENGTH_LONG).show();
+            }
+        }
+    };
+
+    @Override
+    protected void onResume() {
+        // TODO Auto-generated method stub
+        super.onResume();
+        registerReceiver(br, new IntentFilter("Wifi"));
+    }
+
+    @Override
+    protected void onPause() {
+        // TODO Auto-generated method stub
+        super.onPause();
+        unregisterReceiver(br);
     }
 }
