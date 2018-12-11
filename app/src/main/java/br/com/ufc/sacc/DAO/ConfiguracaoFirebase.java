@@ -1,15 +1,15 @@
 package br.com.ufc.sacc.DAO;
 
-import android.support.annotation.NonNull;
-import android.util.Log;
-import br.com.ufc.sacc.Model.Usuario;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class ConfiguracaoFirebase {
     private static DatabaseReference referenciaFirebase;
     private static FirebaseAuth autenticacao;
     private static FirebaseDatabase firebaseDatabase;
+    private static StorageReference firebaseStorageReference;
 
 //    private static int qtdItensConsulta;
 //    private static Usuario usuarioLogado = new Usuario();
@@ -35,6 +35,13 @@ public class ConfiguracaoFirebase {
             firebaseDatabase.setPersistenceEnabled(true);
         }
         return firebaseDatabase;
+    }
+
+    public static StorageReference getFirebaseStorageReference(String email){
+        if(firebaseStorageReference == null){
+            firebaseStorageReference = FirebaseStorage.getInstance().getReference(email);
+        }
+        return firebaseStorageReference;
     }
 
 //    public static int getQtdConsultas(){
