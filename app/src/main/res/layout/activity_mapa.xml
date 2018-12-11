@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+    <FrameLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/frame_mapa"
+            android:layout_width="match_parent"
+            android:layout_height="489dp">
+    </FrameLayout>
+
+
+    <TextView
+            android:id="@+id/txtViewMapa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginTop="10dp"
+            android:text="Av. José de Freitas Queiroz, 5003 - Cedro, Quixadá - CE, 63900-000"
+            android:textStyle="bold|italic"
+            android:textSize="17dp"
+    />
+
+
+</LinearLayout>

@@ -1,21 +1,11 @@
 package br.com.ufc.sacc.Activity.Activities;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.BitmapFactory;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -132,9 +122,6 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
                 for (DataSnapshot objSnap : dataSnapshot.getChildren()) {
                     itemConsultaMarcada = objSnap.getValue(ItemConsultaMarcada.class);
                     listaConsultas.add(itemConsultaMarcada);
-                    if(itemConsultaMarcada.getTipo().equals("Psicóloga")) {
-
-                    }
                 }
             }
             @Override
@@ -194,7 +181,8 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
                 startActivity(intent_faq);
                 break;
             case R.id.nav_location:
-                fragment = new LocationFragment();
+                Intent intentLocation = new Intent(getApplicationContext(), MapaActivity.class);
+                startActivity(intentLocation);
                 break;
             case R.id.nav_minha_consulta:
                 Intent intent_minha_consulta = new Intent(getApplicationContext(), VisualizarConsultasActivity.class);
