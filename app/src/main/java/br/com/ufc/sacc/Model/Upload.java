@@ -1,16 +1,29 @@
 package br.com.ufc.sacc.Model;
 
+import android.net.Uri;
+import com.google.android.gms.tasks.Task;
+
 public class Upload {
     private String mName;
     private String mImageUrl;
+    private Task<Uri> downloadUrl;
 
-    public void Upload(){
+
+    public Upload(String name, String imageUrl) {
+        mName = name;
+        mImageUrl = imageUrl;
+    }
+
+    public void Upload() {
 
     }
 
-    public void Upload(String name, String imageUrl){
-        mName = name;
-        mImageUrl = imageUrl;
+    public Task<Uri> getDownloadUrl() {
+        return downloadUrl;
+    }
+
+    public void setDownloadUrl(Task<Uri> downloadUrl) {
+        this.downloadUrl = downloadUrl;
     }
 
     public String getmName() {

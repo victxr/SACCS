@@ -7,6 +7,7 @@ import com.google.firebase.storage.StorageReference;
 
 public class ConfiguracaoFirebase {
     private static DatabaseReference referenciaFirebase;
+    private static DatabaseReference referenciaFirebaseUpload;
     private static FirebaseAuth autenticacao;
     private static FirebaseDatabase firebaseDatabase;
     private static StorageReference firebaseStorageReference;
@@ -20,6 +21,12 @@ public class ConfiguracaoFirebase {
             referenciaFirebase = FirebaseDatabase.getInstance().getReference();
         }
         return referenciaFirebase;
+    }
+    public static DatabaseReference getFirebaseUpload(){
+        if(referenciaFirebaseUpload == null){
+            referenciaFirebaseUpload = FirebaseDatabase.getInstance().getReference("uploads");
+        }
+        return referenciaFirebaseUpload;
     }
 
     public static FirebaseAuth getAutenticacaoFirebase(){
@@ -37,9 +44,9 @@ public class ConfiguracaoFirebase {
         return firebaseDatabase;
     }
 
-    public static StorageReference getFirebaseStorageReference(String email){
+    public static StorageReference getFirebaseStorageReference(){
         if(firebaseStorageReference == null){
-            firebaseStorageReference = FirebaseStorage.getInstance().getReference(email);
+            firebaseStorageReference = FirebaseStorage.getInstance().getReference("uploads");
         }
         return firebaseStorageReference;
     }

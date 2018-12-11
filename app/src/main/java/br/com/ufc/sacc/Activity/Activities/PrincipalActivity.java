@@ -3,6 +3,7 @@ package br.com.ufc.sacc.Activity.Activities;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -26,17 +27,26 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import br.com.ufc.sacc.Activity.Fragments.NavigationDrawer.*;
 import br.com.ufc.sacc.DAO.ConfiguracaoFirebase;
 import br.com.ufc.sacc.Model.ItemConsultaMarcada;
+import br.com.ufc.sacc.Model.Upload;
 import br.com.ufc.sacc.Model.Usuario;
 import br.com.ufc.sacc.R;
 import br.com.ufc.sacc.ServicesBroadcasts.ServiceNotificar;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.*;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -45,11 +55,16 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
     private DrawerLayout drawer;
     private FirebaseDatabase fireBaseDatabase;
     private DatabaseReference databaseReference;
+    private DatabaseReference databaseReferenceUpload;
+    private StorageReference mStorageRef;
     private FirebaseAuth autenticacao;
     private String emailAlunoLogado;
     private Usuario usuarioLogado = new Usuario();
     private ItemConsultaMarcada itemConsultaMarcada= new ItemConsultaMarcada();
     private TextView nomeUser, emailUser;
+    private ImageView mImageView;
+    private Uri mImageUri;
+    private static final int PICK_IMAGE_REQUEST = 1;
 
     private static final String QTD_CONSULTA = "br.com.ufc.sacc.Activity.Activities.qtd_consulta";
     private int qtdConsultasMarcadas = 0;
@@ -67,7 +82,61 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         pegarConsultasMarcadas();
         atualizaQtdConsulta();
 
+        mImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFileEscolher();
+            }
+        });
+
         loadFragment(new HomeFragment());
+    }
+
+    private void openFileEscolher() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null){
+            mImageUri = data.getData();
+
+            Picasso.with(this).load(mImageUri).into(mImageView);
+
+            uploadFile();
+
+        }
+    }
+
+    private void uploadFile(){
+        if(mImageUri!=null){
+            StorageReference fileReference = mStorageRef.child(emailAlunoLogado+"."+getFileExtension(mImageUri));
+            fileReference.putFile(mImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Task<Uri> downloadUri = taskSnapshot.getMetadata().getReference().getDownloadUrl();
+                    String generatedFilePath = downloadUri.toString();
+                    Upload upload = new Upload(emailAlunoLogado, downloadUri.toString());
+                    String uploadId = databaseReferenceUpload.push().getKey();
+                    databaseReferenceUpload.child(uploadId).setValue(upload);
+                }
+            });
+
+        }else {
+            Toast.makeText(PrincipalActivity.this, "Nenhuma imagem selecionada.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    private String getFileExtension(Uri uri){
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
     private void inicializarComponentes() {
@@ -81,6 +150,7 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         navigationView.setNavigationItemSelectedListener(this);
 
         View header = navigationView.getHeaderView(0);
+        mImageView = header.findViewById(R.id.imgUser);
         nomeUser = header.findViewById(R.id.nomeUser);
         emailUser = header.findViewById(R.id.emailUser);
 
@@ -95,6 +165,8 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         FirebaseApp.initializeApp(PrincipalActivity.this);
         fireBaseDatabase = ConfiguracaoFirebase.getFirebaseDatabase();
         databaseReference = ConfiguracaoFirebase.getFirebase();
+        databaseReferenceUpload = ConfiguracaoFirebase.getFirebaseUpload();
+        mStorageRef = ConfiguracaoFirebase.getFirebaseStorageReference();
     }
 
     private void pegarUsuarioLogado() {
