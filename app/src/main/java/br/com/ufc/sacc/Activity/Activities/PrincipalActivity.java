@@ -109,7 +109,6 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
             Picasso.with(this).load(mImageUri).into(mImageView);
 
             uploadFile();
-
         }
     }
 
@@ -131,7 +130,6 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
             Toast.makeText(PrincipalActivity.this, "Nenhuma imagem selecionada.", Toast.LENGTH_SHORT).show();
         }
     }
-
 
     private String getFileExtension(Uri uri){
         ContentResolver cR = getContentResolver();
@@ -330,5 +328,4 @@ public class PrincipalActivity extends AppCompatActivity implements NavigationVi
         sharedPreference();
         atualizaQtdConsulta();
     }
-
 }

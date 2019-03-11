@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
         btnAbrirActivityLogin = findViewById(R.id.btnFazerLogin);
         btnAbrirActivityCadastro = findViewById(R.id.btnFazerCadastro);
 
-
         btnAbrirActivityLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
